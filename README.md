@@ -1,5 +1,7 @@
 ### Hi there 👋
 
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&duration=2000&pause=100&center=true&vCenter=true&multiline=true&width=720&height=175&lines=Gui's+are+a+lie%2C+they+are+just+front-ends+to+the+shell.;Through+the+shell%2C+I+gain+sudo.;Through+sudo%2C+I+gain+power.;Through+power%2C+I+gain+root;Through+root%2C+my+chains+are+broken.;uid%3D0+shall+free+me...." alt="Typing SVG" /></a>
+
 <!--START_SECTION:waka-->
 ![Code Time](http://img.shields.io/badge/Code%20Time-555%20hrs%207%20mins-blue)
 
