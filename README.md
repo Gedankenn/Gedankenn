@@ -4,7 +4,7 @@
 
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-593%20hrs%2042%20mins-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-595%20hrs%2053%20mins-blue)
 
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-0-blue)
 
@@ -47,18 +47,18 @@ Sunday                   21 commits          ████░░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-C                        5 hrs 50 mins       ████████████████████████░   96.75 % 
-Python                   11 mins             █░░░░░░░░░░░░░░░░░░░░░░░░   03.24 % 
+C                        6 hrs 47 mins       ████████████████████████░   97.66 % 
+Python                   9 mins              █░░░░░░░░░░░░░░░░░░░░░░░░   02.34 % 
 Objective-C              0 secs              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 % 
 
 🔥 Editors: 
-VS Code                  6 hrs 2 mins        █████████████████████████   100.00 % 
+VS Code                  6 hrs 57 mins       █████████████████████████   100.00 % 
 
 🐱‍💻 Projects: 
-modulo-16r               6 hrs 2 mins        █████████████████████████   100.00 % 
+modulo-16r               6 hrs 57 mins       █████████████████████████   100.00 % 
 
 💻 Operating System: 
-Linux                    6 hrs 2 mins        █████████████████████████   100.00 % 
+Linux                    6 hrs 57 mins       █████████████████████████   100.00 % 
 ```
 
 **I Mostly Code in Python** 
@@ -78,5 +78,5 @@ Jupyter Notebook         1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 04/10/2023 18:37:53 UTC
+ Last Updated on 05/10/2023 18:36:50 UTC
 <!--END_SECTION:waka-->
