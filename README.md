@@ -47,21 +47,16 @@ Sunday                   19 commits          ███░░░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-Python                   1 hr 11 mins        ███████████████░░░░░░░░░░   61.39 % 
-C                        22 mins             █████░░░░░░░░░░░░░░░░░░░░   19.46 % 
-Markdown                 21 mins             █████░░░░░░░░░░░░░░░░░░░░   18.38 % 
-Other                    0 secs              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.78 % 
+No Activity Tracked This Week
 
 🔥 Editors: 
-VS Code                  1 hr 55 mins        █████████████████████████   100.00 % 
+No Activity Tracked This Week
 
 🐱‍💻 Projects: 
-BootLoader               1 hr 9 mins         ███████████████░░░░░░░░░░   60.10 % 
-modulo-16r               45 mins             ██████████░░░░░░░░░░░░░░░   39.12 % 
-bootloader-modulo-16r    0 secs              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.78 % 
+No Activity Tracked This Week
 
 💻 Operating System: 
-Linux                    1 hr 55 mins        █████████████████████████   100.00 % 
+No Activity Tracked This Week
 ```
 
 **I Mostly Code in Python** 
@@ -81,5 +76,5 @@ C++                      1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 22/12/2023 18:33:15 UTC
+ Last Updated on 23/12/2023 18:33:08 UTC
 <!--END_SECTION:waka-->
