@@ -47,16 +47,22 @@ Sunday                   19 commits          ███░░░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-No Activity Tracked This Week
+C                        1 hr 2 mins         ████████████████████░░░░░   79.47 % 
+Other                    14 mins             ████░░░░░░░░░░░░░░░░░░░░░   17.97 % 
+Python                   2 mins              █░░░░░░░░░░░░░░░░░░░░░░░░   02.56 % 
 
 🔥 Editors: 
-No Activity Tracked This Week
+VS Code                  1 hr 18 mins        █████████████████████████   100.00 % 
 
 🐱‍💻 Projects: 
-No Activity Tracked This Week
+BootLoader               21 mins             ███████░░░░░░░░░░░░░░░░░░   27.09 % 
+bootloader_power_manager_15 mins             █████░░░░░░░░░░░░░░░░░░░░   19.93 % 
+power_manager_uc         15 mins             █████░░░░░░░░░░░░░░░░░░░░   19.18 % 
+modulo-16r               9 mins              ███░░░░░░░░░░░░░░░░░░░░░░   12.40 % 
+ino_avi_protocol         8 mins              ███░░░░░░░░░░░░░░░░░░░░░░   11.40 % 
 
 💻 Operating System: 
-No Activity Tracked This Week
+Linux                    1 hr 18 mins        █████████████████████████   100.00 % 
 ```
 
 **I Mostly Code in Python** 
@@ -76,5 +82,5 @@ C++                      1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 03/01/2024 18:33:32 UTC
+ Last Updated on 04/01/2024 18:33:38 UTC
 <!--END_SECTION:waka-->
