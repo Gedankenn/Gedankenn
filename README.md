@@ -4,7 +4,7 @@
 
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-729%20hrs%2035%20mins-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-729%20hrs%2037%20mins-blue)
 
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-1-blue)
 
@@ -12,11 +12,11 @@
 
 > 📦 164.1 kB Used in GitHub's Storage 
  > 
-> 🏆 2 Contributions in the Year 2024
+> 🏆 3 Contributions in the Year 2024
  > 
 > 💼 Opted to Hire
  > 
-> 📜 25 Public Repositories 
+> 📜 26 Public Repositories 
  > 
 > 🔑 1 Private Repositories 
  > 
@@ -69,11 +69,11 @@ Linux                    5 hrs 34 mins       ███████████�
 **I Mostly Code in Python** 
 
 ```text
-Python                   5 repos             ███████░░░░░░░░░░░░░░░░░░   27.78 % 
-C                        4 repos             ██████░░░░░░░░░░░░░░░░░░░   22.22 % 
-Assembly                 1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   05.56 % 
-Jupyter Notebook         1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   05.56 % 
-C++                      1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   05.56 % 
+Python                   6 repos             ████████░░░░░░░░░░░░░░░░░   31.58 % 
+C                        4 repos             █████░░░░░░░░░░░░░░░░░░░░   21.05 % 
+Assembly                 1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   05.26 % 
+Jupyter Notebook         1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   05.26 % 
+C++                      1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   05.26 % 
 ```
 
 
@@ -83,5 +83,5 @@ C++                      1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 14/01/2024 18:35:17 UTC
+ Last Updated on 15/01/2024 18:36:21 UTC
 <!--END_SECTION:waka-->
