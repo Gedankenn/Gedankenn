@@ -4,13 +4,15 @@
 
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-980%20hrs%201%20min-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-980%20hrs%2027%20mins-blue)
 
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-8-blue)
 
 **🐱 My GitHub Data** 
 
 > 📦 168.1 kB Used in GitHub's Storage 
+ > 
+> 🏆 22 Contributions in the Year 2024
  > 
 > 💼 Opted to Hire
  > 
@@ -45,19 +47,18 @@ Sunday                   27 commits          ████░░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-Python                   2 hrs 43 mins       █████████████████████████   99.61 % 
-conf                     0 secs              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.39 % 
+Python                   3 hrs 40 mins       █████████████████████████   100.00 % 
 
 🔥 Editors: 
-Neovim                   2 hrs 43 mins       █████████████████████████   100.00 % 
+Neovim                   3 hrs 40 mins       █████████████████████████   100.00 % 
 
 🐱‍💻 Projects: 
-yt_downloader            1 hr 38 mins        ███████████████░░░░░░░░░░   60.01 % 
-whatsapp_data_mining     1 hr 4 mins         ██████████░░░░░░░░░░░░░░░   39.34 % 
-Unknown Project          1 min               ░░░░░░░░░░░░░░░░░░░░░░░░░   00.65 % 
+whatsapp_data_mining     2 hrs 1 min         ██████████████░░░░░░░░░░░   55.24 % 
+yt_downloader            1 hr 38 mins        ███████████░░░░░░░░░░░░░░   44.57 % 
+Unknown Project          0 secs              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.20 % 
 
 💻 Operating System: 
-Linux                    2 hrs 43 mins       █████████████████████████   100.00 % 
+Linux                    3 hrs 40 mins       █████████████████████████   100.00 % 
 ```
 
 **I Mostly Code in Python** 
@@ -77,5 +78,5 @@ Jupyter Notebook         1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 11/07/2024 18:35:26 UTC
+ Last Updated on 12/07/2024 18:36:45 UTC
 <!--END_SECTION:waka-->
