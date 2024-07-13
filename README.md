@@ -4,7 +4,7 @@
 
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-980%20hrs%2027%20mins-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-981%20hrs%2025%20mins-blue)
 
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-8-blue)
 
@@ -47,18 +47,18 @@ Sunday                   27 commits          ████░░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-Python                   3 hrs 40 mins       █████████████████████████   100.00 % 
+Python                   3 hrs 2 mins        █████████████████████████   100.00 % 
 
 🔥 Editors: 
-Neovim                   3 hrs 40 mins       █████████████████████████   100.00 % 
+Neovim                   3 hrs 2 mins        █████████████████████████   100.00 % 
 
 🐱‍💻 Projects: 
-whatsapp_data_mining     2 hrs 1 min         ██████████████░░░░░░░░░░░   55.24 % 
-yt_downloader            1 hr 38 mins        ███████████░░░░░░░░░░░░░░   44.57 % 
-Unknown Project          0 secs              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.20 % 
+yt_downloader            1 hr 38 mins        █████████████░░░░░░░░░░░░   53.91 % 
+whatsapp_data_mining     1 hr 23 mins        ███████████░░░░░░░░░░░░░░   45.85 % 
+Unknown Project          0 secs              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.24 % 
 
 💻 Operating System: 
-Linux                    3 hrs 40 mins       █████████████████████████   100.00 % 
+Linux                    3 hrs 2 mins        █████████████████████████   100.00 % 
 ```
 
 **I Mostly Code in Python** 
@@ -78,5 +78,5 @@ Jupyter Notebook         1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 12/07/2024 18:36:45 UTC
+ Last Updated on 13/07/2024 18:33:59 UTC
 <!--END_SECTION:waka-->
