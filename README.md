@@ -4,15 +4,13 @@
 
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-986%20hrs%2059%20mins-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-987%20hrs%2057%20mins-blue)
 
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-0-blue)
 
 **🐱 My GitHub Data** 
 
 > 📦 198.9 kB Used in GitHub's Storage 
- > 
-> 🏆 30 Contributions in the Year 2024
  > 
 > 💼 Opted to Hire
  > 
@@ -47,16 +45,16 @@ Sunday                   31 commits          █████░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-Python                   57 mins             █████████████████████████   100.00 % 
+Python                   1 hr 8 mins         █████████████████████████   100.00 % 
 
 🔥 Editors: 
-Neovim                   57 mins             █████████████████████████   100.00 % 
+Neovim                   1 hr 8 mins         █████████████████████████   100.00 % 
 
 🐱‍💻 Projects: 
-eHome                    57 mins             █████████████████████████   100.00 % 
+eHome                    1 hr 8 mins         █████████████████████████   100.00 % 
 
 💻 Operating System: 
-Linux                    57 mins             █████████████████████████   100.00 % 
+Linux                    1 hr 8 mins         █████████████████████████   100.00 % 
 ```
 
 **I Mostly Code in Python** 
@@ -76,5 +74,5 @@ Jupyter Notebook         1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 07/08/2024 18:40:16 UTC
+ Last Updated on 08/08/2024 18:41:19 UTC
 <!--END_SECTION:waka-->
