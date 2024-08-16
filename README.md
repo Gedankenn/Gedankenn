@@ -4,15 +4,13 @@
 
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-988%20hrs%2058%20mins-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-989%20hrs%2039%20mins-blue)
 
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-0-blue)
 
 **🐱 My GitHub Data** 
 
 > 📦 198.9 kB Used in GitHub's Storage 
- > 
-> 🏆 30 Contributions in the Year 2024
  > 
 > 💼 Opted to Hire
  > 
@@ -76,5 +74,5 @@ Jupyter Notebook         1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 15/08/2024 18:36:29 UTC
+ Last Updated on 16/08/2024 18:36:07 UTC
 <!--END_SECTION:waka-->
