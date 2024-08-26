@@ -12,8 +12,6 @@
 
 > 📦 198.9 kB Used in GitHub's Storage 
  > 
-> 🏆 31 Contributions in the Year 2024
- > 
 > 💼 Opted to Hire
  > 
 > 📜 29 Public Repositories 
@@ -84,5 +82,5 @@ Jupyter Notebook         1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 25/08/2024 18:34:43 UTC
+ Last Updated on 26/08/2024 18:36:23 UTC
 <!--END_SECTION:waka-->
