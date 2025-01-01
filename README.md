@@ -12,8 +12,6 @@
 
 > 📦 200.5 kB Used in GitHub's Storage 
  > 
-> 🏆 93 Contributions in the Year 2024
- > 
 > 💼 Opted to Hire
  > 
 > 📜 34 Public Repositories 
@@ -76,5 +74,5 @@ Assembly                 1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 31/12/2024 18:37:13 UTC
+ Last Updated on 01/01/2025 18:37:21 UTC
 <!--END_SECTION:waka-->
