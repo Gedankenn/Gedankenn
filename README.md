@@ -12,6 +12,8 @@
 
 > 📦 200.6 kB Used in GitHub's Storage 
  > 
+> 🏆 3 Contributions in the Year 2025
+ > 
 > 💼 Opted to Hire
  > 
 > 📜 34 Public Repositories 
@@ -45,16 +47,20 @@ Sunday                   35 commits          ████░░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-No Activity Tracked This Week
+Python                   32 mins             █████████████████████░░░░   82.89 % 
+Lua                      6 mins              ████░░░░░░░░░░░░░░░░░░░░░   16.69 % 
+JSON                     0 secs              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.29 % 
+Vim Script               0 secs              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.13 % 
 
 🔥 Editors: 
-No Activity Tracked This Week
+Neovim                   39 mins             █████████████████████████   100.00 % 
 
 🐱‍💻 Projects: 
-No Activity Tracked This Week
+Unknown Project          32 mins             █████████████████████░░░░   82.89 % 
+nvim                     6 mins              ████░░░░░░░░░░░░░░░░░░░░░   17.11 % 
 
 💻 Operating System: 
-No Activity Tracked This Week
+Linux                    39 mins             █████████████████████████   100.00 % 
 ```
 
 **I Mostly Code in Python** 
@@ -74,5 +80,5 @@ Assembly                 1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 13/03/2025 18:38:54 UTC
+ Last Updated on 14/03/2025 18:38:20 UTC
 <!--END_SECTION:waka-->
