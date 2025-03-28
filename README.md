@@ -4,6 +4,8 @@
 
 
 <!--START_SECTION:waka-->
+![Code Time](http://img.shields.io/badge/Code%20Time-1%2C048%20hrs%2047%20mins-blue)
+
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-0-blue)
 
 **🐱 My GitHub Data** 
@@ -43,19 +45,16 @@ Sunday                   35 commits          ████░░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-C                        17 mins             ████████████████████████░   97.22 % 
-Other                    0 secs              █░░░░░░░░░░░░░░░░░░░░░░░░   02.78 % 
+No Activity Tracked This Week
 
 🔥 Editors: 
-VS Code                  17 mins             ████████████████████████░   97.22 % 
-Neovim                   0 secs              █░░░░░░░░░░░░░░░░░░░░░░░░   02.78 % 
+No Activity Tracked This Week
 
 🐱‍💻 Projects: 
-PITO_IO_BOARD_BASE       17 mins             ████████████████████████░   97.22 % 
-Unknown Project          0 secs              █░░░░░░░░░░░░░░░░░░░░░░░░   02.78 % 
+No Activity Tracked This Week
 
 💻 Operating System: 
-Windows                  17 mins             █████████████████████████   100.00 % 
+No Activity Tracked This Week
 ```
 
 **I Mostly Code in Python** 
@@ -75,5 +74,5 @@ Assembly                 1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 27/03/2025 18:39:19 UTC
+ Last Updated on 28/03/2025 18:40:18 UTC
 <!--END_SECTION:waka-->
