@@ -4,40 +4,40 @@
 
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-555%20hrs%207%20mins-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-1%2C054%20hrs%2058%20mins-blue)
 
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-0-blue)
 
 **🐱 My GitHub Data** 
 
-> 📦 167.4 kB Used in GitHub's Storage 
+> 📦 200.6 kB Used in GitHub's Storage 
  > 
-> 🏆 46 Contributions in the Year 2023
+> 🏆 4 Contributions in the Year 2025
  > 
 > 💼 Opted to Hire
- > 
-> 📜 24 Public Repositories 
+ > If your company allows engineers to work with linux OS, and you think i will be a good fit, please send me an email. i would love to work for a company that allows engineers to work using LINUX OS systems
+> 📜 35 Public Repositories 
  > 
 > 🔑 1 Private Repositories 
  > 
 **I'm a Night 🦉** 
 
 ```text
-🌞 Morning                13 commits          ███░░░░░░░░░░░░░░░░░░░░░░   10.08 % 
-🌆 Daytime                28 commits          █████░░░░░░░░░░░░░░░░░░░░   21.71 % 
-🌃 Evening                62 commits          ████████████░░░░░░░░░░░░░   48.06 % 
-🌙 Night                  26 commits          █████░░░░░░░░░░░░░░░░░░░░   20.16 % 
+🌞 Morning                33 commits          ████░░░░░░░░░░░░░░░░░░░░░   15.28 % 
+🌆 Daytime                53 commits          ██████░░░░░░░░░░░░░░░░░░░   24.54 % 
+🌃 Evening                87 commits          ██████████░░░░░░░░░░░░░░░   40.28 % 
+🌙 Night                  43 commits          █████░░░░░░░░░░░░░░░░░░░░   19.91 % 
 ```
 📅 **I'm Most Productive on Wednesday** 
 
 ```text
-Monday                   20 commits          ████░░░░░░░░░░░░░░░░░░░░░   15.50 % 
-Tuesday                  15 commits          ███░░░░░░░░░░░░░░░░░░░░░░   11.63 % 
-Wednesday                30 commits          ██████░░░░░░░░░░░░░░░░░░░   23.26 % 
-Thursday                 18 commits          ███░░░░░░░░░░░░░░░░░░░░░░   13.95 % 
-Friday                   10 commits          ██░░░░░░░░░░░░░░░░░░░░░░░   07.75 % 
-Saturday                 16 commits          ███░░░░░░░░░░░░░░░░░░░░░░   12.40 % 
-Sunday                   20 commits          ████░░░░░░░░░░░░░░░░░░░░░   15.50 % 
+Monday                   31 commits          ████░░░░░░░░░░░░░░░░░░░░░   14.35 % 
+Tuesday                  18 commits          ██░░░░░░░░░░░░░░░░░░░░░░░   08.33 % 
+Wednesday                52 commits          ██████░░░░░░░░░░░░░░░░░░░   24.07 % 
+Thursday                 27 commits          ███░░░░░░░░░░░░░░░░░░░░░░   12.50 % 
+Friday                   28 commits          ███░░░░░░░░░░░░░░░░░░░░░░   12.96 % 
+Saturday                 25 commits          ███░░░░░░░░░░░░░░░░░░░░░░   11.57 % 
+Sunday                   35 commits          ████░░░░░░░░░░░░░░░░░░░░░   16.20 % 
 ```
 
 
@@ -47,34 +47,33 @@ Sunday                   20 commits          ████░░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-C                        13 hrs 7 mins       █████████████████████░░░░   85.87 % 
-Python                   58 mins             ██░░░░░░░░░░░░░░░░░░░░░░░   06.42 % 
-Makefile                 39 mins             █░░░░░░░░░░░░░░░░░░░░░░░░   04.31 % 
-ActionScript 3           17 mins             ░░░░░░░░░░░░░░░░░░░░░░░░░   01.92 % 
-GDScript                 4 mins              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.44 % 
+XML                      2 hrs 11 mins       ██████████████████████░░░   87.82 % 
+C                        15 mins             ███░░░░░░░░░░░░░░░░░░░░░░   10.43 % 
+Other                    2 mins              ░░░░░░░░░░░░░░░░░░░░░░░░░   01.74 % 
+Git Config               0 secs              ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 % 
 
 🔥 Editors: 
-VS Code                  15 hrs 17 mins      █████████████████████████   100.00 % 
+VS Code                  2 hrs 29 mins       █████████████████████████   100.00 % 
 
 🐱‍💻 Projects: 
-dimmer-x                 7 hrs 44 mins       █████████████░░░░░░░░░░░░   50.63 % 
-modulo-4an               4 hrs 7 mins        ███████░░░░░░░░░░░░░░░░░░   26.99 % 
-modulo-16r-bluepill      1 hr 59 mins        ███░░░░░░░░░░░░░░░░░░░░░░   13.02 % 
-face_detection           58 mins             ██░░░░░░░░░░░░░░░░░░░░░░░   06.43 % 
-unium                    18 mins             █░░░░░░░░░░░░░░░░░░░░░░░░   02.03 % 
+PM00641_PITO_IO_BOARD    2 hrs 1 min         ████████████████████░░░░░   81.37 % 
+PITO_IO_BOARD_BASE       16 mins             ███░░░░░░░░░░░░░░░░░░░░░░   10.86 % 
+brake_handler            7 mins              █░░░░░░░░░░░░░░░░░░░░░░░░   04.99 % 
+common_data              1 min               ░░░░░░░░░░░░░░░░░░░░░░░░░   01.23 % 
+ALL_FATHER               1 min               ░░░░░░░░░░░░░░░░░░░░░░░░░   01.12 % 
 
 💻 Operating System: 
-Linux                    15 hrs 17 mins      █████████████████████████   100.00 % 
+Windows                  2 hrs 29 mins       █████████████████████████   100.00 % 
 ```
 
 **I Mostly Code in Python** 
 
 ```text
-Python                   5 repos             ███████░░░░░░░░░░░░░░░░░░   29.41 % 
-C                        4 repos             ██████░░░░░░░░░░░░░░░░░░░   23.53 % 
-CSS                      1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   05.88 % 
-Assembly                 1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   05.88 % 
-Jupyter Notebook         1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   05.88 % 
+Python                   8 repos             █████████░░░░░░░░░░░░░░░░   34.78 % 
+C                        6 repos             ███████░░░░░░░░░░░░░░░░░░   26.09 % 
+Lua                      2 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   08.70 % 
+Jupyter Notebook         2 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   08.70 % 
+Assembly                 1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   04.35 % 
 ```
 
 
@@ -84,5 +83,5 @@ Jupyter Notebook         1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 31/08/2023 18:36:04 UTC
+ Last Updated on 15/04/2025 18:38:58 UTC
 <!--END_SECTION:waka-->
