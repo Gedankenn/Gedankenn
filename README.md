@@ -15,7 +15,7 @@
 > 🏆 4 Contributions in the Year 2025
  > 
 > 💼 Opted to Hire
- > 
+ > If your company allows engineers to work with linux OS, and you think i will be a good fit, please send me an email. i would love to work for a company that allows engineers to work using LINUX OS systems
 > 📜 35 Public Repositories 
  > 
 > 🔑 1 Private Repositories 
