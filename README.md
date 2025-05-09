@@ -47,16 +47,18 @@ Sunday                   35 commits          ████░░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-No Activity Tracked This Week
+Other                    35 mins             ████████████████░░░░░░░░░   63.85 % 
+C                        20 mins             █████████░░░░░░░░░░░░░░░░   36.15 % 
 
 🔥 Editors: 
-No Activity Tracked This Week
+VS Code                  55 mins             █████████████████████████   100.00 % 
 
 🐱‍💻 Projects: 
-No Activity Tracked This Week
+Unknown Project          35 mins             ████████████████░░░░░░░░░   63.85 % 
+hal_fpito_imx            20 mins             █████████░░░░░░░░░░░░░░░░   36.15 % 
 
 💻 Operating System: 
-No Activity Tracked This Week
+Windows                  55 mins             █████████████████████████   100.00 % 
 ```
 
 **I Mostly Code in Python** 
@@ -76,5 +78,5 @@ Assembly                 1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 08/05/2025 18:40:37 UTC
+ Last Updated on 09/05/2025 18:39:52 UTC
 <!--END_SECTION:waka-->
