@@ -4,7 +4,7 @@
 
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-1%2C069%20hrs%2023%20mins-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-1%2C069%20hrs%2027%20mins-blue)
 
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-0-blue)
 
@@ -45,19 +45,16 @@ Sunday                   35 commits          ████░░░░░░░�
 🕑︎ Time Zone: America/Sao_Paulo
 
 💬 Programming Languages: 
-Markdown                 39 mins             ████████████████░░░░░░░░░   64.16 % 
-C                        21 mins             █████████░░░░░░░░░░░░░░░░   35.84 % 
+Markdown                 39 mins             █████████████████████████   100.00 % 
 
 🔥 Editors: 
-VS Code                  1 hr 1 min          █████████████████████████   100.00 % 
+VS Code                  39 mins             █████████████████████████   100.00 % 
 
 🐱‍💻 Projects: 
-PITO_CONTROL_BOARD       43 mins             ██████████████████░░░░░░░   70.95 % 
-hal_pito_imx             9 mins              ████░░░░░░░░░░░░░░░░░░░░░   15.33 % 
-PITO_CONTROL_BOARD_BASE  8 mins              ███░░░░░░░░░░░░░░░░░░░░░░   13.73 % 
+PITO_CONTROL_BOARD       39 mins             █████████████████████████   100.00 % 
 
 💻 Operating System: 
-Windows                  1 hr 1 min          █████████████████████████   100.00 % 
+Windows                  39 mins             █████████████████████████   100.00 % 
 ```
 
 **I Mostly Code in Python** 
@@ -77,5 +74,5 @@ Assembly                 1 repo              █░░░░░░░░░░�
 ![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
 
 
- Last Updated on 05/06/2025 18:53:40 UTC
+ Last Updated on 06/06/2025 18:41:08 UTC
 <!--END_SECTION:waka-->
