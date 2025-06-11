@@ -69,10 +69,5 @@ Assembly                 1 repo              █░░░░░░░░░░�
 
 
 
-**Timeline**
-
-![Lines of Code chart](https://raw.githubusercontent.com/Gedankenn/Gedankenn/main/assets/bar_graph.png)
-
-
  Last Updated on 10/06/2025 18:41:18 UTC
 <!--END_SECTION:waka-->
