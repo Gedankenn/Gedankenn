@@ -1,73 +1,147 @@
-### Hi there 👋
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fabio S. Stella | Embedded Systems Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Fira Code', monospace;
+    }
+    body {
+      background-color: #0f0f0f;
+      color: #f0f0f0;
+      padding: 2rem;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: #66ffcc;
+      margin-top: 0.5rem;
+    }
+    section {
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+    a {
+      color: #66ffcc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .socials {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    .socials a {
+      margin: 0 1rem;
+    }
+    .metrics {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+    .metric-box {
+      background-color: #1a1a1a;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(102, 255, 204, 0.2);
+    }
+    .metric-number {
+      font-size: 2rem;
+      color: #66ffcc;
+    }
+    .metric-label {
+      font-size: 1rem;
+      color: #ccc;
+    }
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      color: #888;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div style="text-align:center; margin-bottom: 2rem;">
+    <a href="https://git.io/typing-svg">
+      <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&duration=2000&pause=100&center=true&vCenter=true&multiline=true&width=720&height=175&lines=Gui's+are+a+lie%2C+they+are+just+front-ends+to+the+shell.;Through+the+shell%2C+I+gain+sudo.;Through+sudo%2C+I+gain+power.;Through+power%2C+I+gain+root.;Through+root%2C+my+chains+are+broken.;uid%3D0+shall+free+me...." alt="Typing SVG" />
+    </a>
+  </div>
 
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&duration=2000&pause=100&center=true&vCenter=true&multiline=true&width=720&height=175&lines=Gui's+are+a+lie%2C+they+are+just+front-ends+to+the+shell.;Through+the+shell%2C+I+gain+sudo.;Through+sudo%2C+I+gain+power.;Through+power%2C+I+gain+root.;Through+root%2C+my+chains+are+broken.;uid%3D0+shall+free+me...." alt="Typing SVG" /></a>
+  <header>
+    <h1>Fabio S. Stella</h1>
+    <div class="subtitle">Computer Engineer • Embedded Systems Enthusiast • Linux Power User</div>
+  </header>
 
+  <section>
+    <h2>About Me</h2>
+    <p>
+      Hi! I'm Fabio, an embedded systems engineer passionate about real-time systems, hardware-software integration, and all things Linux.
+      I currently work at Progress Rail, where I develop mission-critical embedded software for the railway industry.
+    </p>
+  </section>
 
-<!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-1%2C069%20hrs%2029%20mins-blue)
+  <section>
+    <h2>Work Metrics</h2>
+    <div class="metrics">
+      <div class="metric-box">
+        <div class="metric-number">20K+</div>
+        <div class="metric-label">Lines of C/C++ Written</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">40+</div>
+        <div class="metric-label">Embedded Boards Programmed</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">5+</div>
+        <div class="metric-label">Years in Embedded Systems</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">> 95%</div>
+        <div class="metric-label">Linux Uptime During Dev</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">∞</div>
+        <div class="metric-label">Terminal Commands Mastered</div>
+      </div>
+    </div>
+  </section>
 
-![Profile Views](http://img.shields.io/badge/Profile%20Views-0-blue)
+  <section>
+    <h2>Featured Projects</h2>
+    <ul>
+      <li><a href="https://github.com/Gedankenn/esp32_wattimeter" target="_blank">ESP32 Wattimeter</a> - Energy monitoring system with OTA updates</li>
+      <li><a href="https://github.com/Gedankenn/portfolio" target="_blank">Terminal Stock Portfolio</a> - CLI app to monitor dividends and stock performance</li>
+    </ul>
+  </section>
 
-**🐱 My GitHub Data** 
+  <section>
+    <h2>Contact & Links</h2>
+    <div class="socials">
+      <a href="mailto:fabioslikastella@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/Gedankenn" target="_blank">GitHub</a>
+    </div>
+  </section>
 
-> 📦 200.8 kB Used in GitHub's Storage 
- > 
-> 💼 Opted to Hire
- > 
-> 📜 36 Public Repositories 
- > 
-> 🔑 1 Private Repositories 
- > 
-**I'm a Night 🦉** 
-
-```text
-🌞 Morning                34 commits          ████░░░░░░░░░░░░░░░░░░░░░   15.38 % 
-🌆 Daytime                53 commits          ██████░░░░░░░░░░░░░░░░░░░   23.98 % 
-🌃 Evening                91 commits          ██████████░░░░░░░░░░░░░░░   41.18 % 
-🌙 Night                  43 commits          █████░░░░░░░░░░░░░░░░░░░░   19.46 % 
-```
-📅 **I'm Most Productive on Wednesday** 
-
-```text
-Monday                   32 commits          ████░░░░░░░░░░░░░░░░░░░░░   14.48 % 
-Tuesday                  18 commits          ██░░░░░░░░░░░░░░░░░░░░░░░   08.14 % 
-Wednesday                53 commits          ██████░░░░░░░░░░░░░░░░░░░   23.98 % 
-Thursday                 29 commits          ███░░░░░░░░░░░░░░░░░░░░░░   13.12 % 
-Friday                   29 commits          ███░░░░░░░░░░░░░░░░░░░░░░   13.12 % 
-Saturday                 25 commits          ███░░░░░░░░░░░░░░░░░░░░░░   11.31 % 
-Sunday                   35 commits          ████░░░░░░░░░░░░░░░░░░░░░   15.84 % 
-```
-
-
-📊 **This Week I Spent My Time On** 
-
-```text
-🕑︎ Time Zone: America/Sao_Paulo
-
-💬 Programming Languages: 
-Markdown                 3 mins              █████████████████████████   100.00 % 
-
-🔥 Editors: 
-VS Code                  3 mins              █████████████████████████   100.00 % 
-
-🐱‍💻 Projects: 
-PITO_CONTROL_BOARD       3 mins              █████████████████████████   100.00 % 
-
-💻 Operating System: 
-Windows                  3 mins              █████████████████████████   100.00 % 
-```
-
-**I Mostly Code in Python** 
-
-```text
-Python                   8 repos             ████████░░░░░░░░░░░░░░░░░   33.33 % 
-C                        7 repos             ███████░░░░░░░░░░░░░░░░░░   29.17 % 
-Lua                      2 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   08.33 % 
-Jupyter Notebook         2 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   08.33 % 
-Assembly                 1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   04.17 % 
-```
-
-
-
- Last Updated on 10/06/2025 18:41:18 UTC
-<!--END_SECTION:waka-->
+  <footer>
+    &copy; 2025 Fabio S. Stella — Powered by open source and coffee ☕
+  </footer>
+</body>
+</html>
