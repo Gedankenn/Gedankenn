@@ -47,6 +47,7 @@ I currently work at **Progress Rail**, where I develop mission-critical embedded
 - 📧 [Email](mailto:fabioslikastella@gmail.com)  
 - 💼 [LinkedIn](https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/)  
 - 🖥️ [GitHub](https://github.com/Gedankenn)
+- 🐦 [X / Twitter](https://x.com/Th00rBeardedOne)
 
 ---
 
