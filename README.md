@@ -31,7 +31,7 @@ I currently work at **Progress Rail**, where I develop mission-critical embedded
 - [**File Transfer**](https://github.com/Gedankenn/file_transfer_python)  
   File transfer over IP-V6
 
-- [**Terminal Stock Portfolio**](https://github.com/Gedankenn/portfolio)  
+- [**Terminal Stock Portfolio**](https://github.com/Gedankenn/stocks)  
   CLI app to monitor dividends and stock performance
 
 - [**Temp Sensor Arduino**](https://github.com/Gedankenn/arduino_temp_sensor)  
