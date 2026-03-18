@@ -13,7 +13,7 @@
 
 I'm Fabio, a **Computer Engineer working with R&D-oriented embedded systems**, specialized in **firmware, low-level software, and hardware–software co-design**.
 
-I currently work at **Autenpro**, developing **embedded systems for agricultural machinery**, focused on sensing, automation, and real-time control.
+I currently work at **ControlID**, developing **embedded systems for agricultural machinery**, focused on sensing, automation, and real-time control.
 
 My work and personal projects revolve around:
 - turning hardware into real products  
