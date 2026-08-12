@@ -18,10 +18,39 @@ jobs:
         with:
           filename: github-metrics.svg
           token: ${{ secrets.GITHUB_TOKEN }}
+          template: terminal
           base: header, activity, community, repositories, metadata
-          theme: cyberpunk
+          config_timezone: America/Sao_Paulo
+          config_animations: no
+          extras_css: |
+            svg { background: #05060f !important; }
+            pre { background: #0a0d1f !important; }
+            .title { color: #00f0ff !important; }
+            .header { background: linear-gradient(#14162c 0%, #0c0e20 100%) !important; }
+            .button.exit { background: linear-gradient(#ff7cc9 0%, #ff2daa 100%) !important; }
+            pre, .banner, footer { color: #c9c9e0 !important; }
+            .banner { color: #00f0ff !important; }
+            footer { color: #8a8aa8 !important; }
+            .ps1-path { color: #00f0ff !important; }
+            .ps1-location { color: #ff2daa !important; }
+            .diff { color: #8b5cf6 !important; }
+            .warnings { color: #ffb300 !important; }
+            :root {
+              --color-calendar-graph-day-bg: #12142a;
+              --color-calendar-graph-day-border: rgba(0,240,255,0.08);
+              --color-calendar-graph-day-L1-bg: #0a3f52;
+              --color-calendar-graph-day-L2-bg: #087c9e;
+              --color-calendar-graph-day-L3-bg: #00c4d6;
+              --color-calendar-graph-day-L4-bg: #00f0ff;
+              --color-calendar-graph-day-L1-border: rgba(0,240,255,0.08);
+              --color-calendar-graph-day-L2-border: rgba(0,240,255,0.08);
+              --color-calendar-graph-day-L3-border: rgba(0,240,255,0.08);
+              --color-calendar-graph-day-L4-border: rgba(0,240,255,0.08);
+            }
           plugin_languages: yes
           plugin_languages_details: bytes-size, percentage
-          plugin_languages_ignored: html, css
-          plugin_achievements: yes
-          plugin_achievements_display: compact
+          plugin_languages_ignored: html, css, tex
+          plugin_lines: yes
+          plugin_lines_history_limit: 3
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
