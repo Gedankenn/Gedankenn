@@ -17,13 +17,15 @@
 
 ## ⚡ whoami
 
-Computer Engineer working on **R&D embedded systems** at **ControlID** — firmware for agricultural machinery, focused on sensing, automation and real-time control.
+Computer Engineer working on **R&D embedded systems** at **ControlID** — firmware for access control, focused on sensing, security and real-time control.
 
 I build low-level software where **physics, electrons and code collide**: system bring-up, drivers, bootloaders, control loops. At home with oscilloscopes, logic analyzers, datasheets and a Linux terminal.
 
 ```bash
 $ whoami
 fabio — R&D firmware engineer
+$ echo "$education"
+bsc. computer engineering — UTFPR, pato branco/PR
 $ echo "stack"
 close_to_the_metal()
 ```
@@ -82,7 +84,7 @@ close_to_the_metal()
 ## 📊 System Stats
 
 <p align="center">
-  <img src="github-metrics.svg" alt="GitHub Metrics — cyberpunk" width="100%">
+  <img src="github-metrics.svg" alt="GitHub Metrics — cyberpunk terminal" width="72%">
 </p>
 
 <p align="center">
