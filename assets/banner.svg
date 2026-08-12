@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05060f"/>
+      <stop offset="0.55" stop-color="#0a0d1f"/>
+      <stop offset="1" stop-color="#0d0a1e"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#00f0ff" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#00f0ff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="300" fill="url(#bg)"/>
+
+  <!-- grid -->
+  <g stroke="#00f0ff" stroke-opacity="0.06">
+    <path d="M60,0 V300 M120,0 V300 M180,0 V300 M240,0 V300 M300,0 V300 M360,0 V300 M420,0 V300 M480,0 V300 M540,0 V300 M600,0 V300 M660,0 V300 M720,0 V300 M780,0 V300 M840,0 V300 M900,0 V300"/>
+    <path d="M0,40 H960 M0,80 H960 M0,120 H960 M0,160 H960 M0,200 H960 M0,240 H960"/>
+  </g>
+
+  <!-- circuit traces -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M30,36 H150 L170,56 H300" stroke="#00f0ff" stroke-opacity="0.35" stroke-width="1.5"/>
+    <circle cx="300" cy="56" r="3.5" fill="none" stroke="#00f0ff" stroke-opacity="0.7"/>
+    <path d="M930,44 H820 L800,64 H680" stroke="#ff2daa" stroke-opacity="0.3" stroke-width="1.5"/>
+    <circle cx="680" cy="64" r="3.5" fill="none" stroke="#ff2daa" stroke-opacity="0.6"/>
+  </g>
+
+  <!-- status line top-left -->
+  <g font-family="monospace" font-size="13" fill="#8a8aa8">
+    <text x="34" y="26">fabio@embedded:~$ whoami</text>
+    <text x="34" y="44" fill="#00f0ff">fabio · R&amp;D firmware engineer</text>
+    <text x="34" y="62" fill="#8a8aa8">loc: pato branco, BR</text>
+  </g>
+
+  <!-- status line top-right -->
+  <g font-family="monospace" font-size="13">
+    <text x="930" y="26" text-anchor="end" fill="#8a8aa8">[ sys ]</text>
+    <text x="930" y="44" text-anchor="end" fill="#8a8aa8">os: linux</text>
+    <text x="930" y="62" text-anchor="end" fill="#8a8aa8">uid: <tspan fill="#ff2daa">0</tspan></text>
+  </g>
+
+  <!-- title: chromatic aberration layers -->
+  <text x="482" y="150" text-anchor="middle" font-family="monospace" font-size="66" font-weight="bold" letter-spacing="10" fill="#ff2daa" fill-opacity="0.35">GEDANKENN</text>
+  <text x="478" y="150" text-anchor="middle" font-family="monospace" font-size="66" font-weight="bold" letter-spacing="10" fill="#8b5cf6" fill-opacity="0.4">GEDANKENN</text>
+  <text x="480" y="150" text-anchor="middle" font-family="monospace" font-size="66" font-weight="bold" letter-spacing="10" fill="#00f0ff">GEDANKENN</text>
+
+  <text x="482" y="150" text-anchor="middle" font-family="monospace" font-size="66" font-weight="bold" letter-spacing="10" fill="none" stroke="#00f0ff" stroke-opacity="0.25">GEDANKENN</text>
+
+  <!-- divider -->
+  <line x1="280" y1="180" x2="682" y2="180" stroke="#1b1b3a" stroke-width="1"/>
+  <polygon points="682,174 692,180 682,186" fill="#ff2daa" fill-opacity="0.8"/>
+  <circle cx="272" cy="180" r="2.5" fill="#00f0ff"/>
+
+  <!-- subtitle -->
+  <text x="480" y="212" text-anchor="middle" font-family="monospace" font-size="17" letter-spacing="4" fill="#c9c9e0">R&amp;D FIRMWARE ENGINEER</text>
+  <text x="480" y="232" text-anchor="middle" font-family="monospace" font-size="12" letter-spacing="3" fill="#8a8aa8">EMBEDDED SYSTEMS · LINUX · CLOSE TO THE METAL</text>
+
+  <!-- 3-phase waves -->
+  <g fill="none" stroke-width="1.4" stroke-linecap="round">
+    <path d="M0,258.0 L8,261.4 L16,264.6 L24,267.3 L32,269.3 L40,270.6 L48,271.0 L56,270.5 L64,269.1 L72,267.0 L80,264.2 L88,261.0 L96,257.6 L104,254.2 L112,251.1 L120,248.4 L128,246.5 L136,245.3 L144,245.0 L152,245.6 L160,247.1 L168,249.4 L176,252.2 L184,255.4 L192,258.9 L200,262.2 L208,265.3 L216,267.9 L224,269.7 L232,270.8 L240,271.0 L248,270.2 L256,268.6 L264,266.3 L272,263.4 L280,260.1 L288,256.7 L296,253.4 L304,250.4 L312,247.9 L320,246.1 L328,245.1 L336,245.1 L344,245.9 L352,247.6 L360,250.0 L368,253.0 L376,256.3 L384,259.7 L392,263.0 L400,266.0 L408,268.4 L416,270.1 L424,270.9 L432,270.9 L440,269.9 L448,268.1 L456,265.6 L464,262.6 L472,259.3 L480,255.9 L488,252.6 L496,249.7 L504,247.4 L512,245.8 L520,245.0 L528,245.2 L536,246.3 L544,248.1 L552,250.7 L560,253.8 L568,257.1 L576,260.6 L584,263.8 L592,266.6 L600,268.9 L608,270.4 L616,271.0 L624,270.7 L632,269.5 L640,267.6 L648,264.9 L656,261.8 L664,258.4 L672,255.0 L680,251.8 L688,249.0 L696,246.9 L704,245.5 L712,245.0 L720,245.4 L728,246.7 L736,248.7 L744,251.4 L752,254.6 L760,258.0 L768,261.4 L776,264.6 L784,267.3 L792,269.3 L800,270.6 L808,271.0 L816,270.5 L824,269.1 L832,267.0 L840,264.2 L848,261.0 L856,257.6 L864,254.2 L872,251.1 L880,248.4 L888,246.5 L896,245.3 L904,245.0 L912,245.6 L920,247.1 L928,249.4 L936,252.2 L944,255.4 L952,258.9 L960,262.2" stroke="#00f0ff" stroke-opacity="0.45"/>
+    <path d="M0,269.3 L8,267.2 L16,264.4 L24,261.3 L32,257.9 L40,254.5 L48,251.3 L56,248.6 L64,246.6 L72,245.4 L80,245.0 L88,245.6 L96,247.0 L104,249.1 L112,251.9 L120,255.2 L128,258.6 L136,261.9 L144,265.1 L152,267.7 L160,269.6 L168,270.7 L176,271.0 L184,270.3 L192,268.8 L200,266.5 L208,263.7 L216,260.4 L224,257.0 L232,253.6 L240,250.6 L248,248.1 L256,246.2 L264,245.2 L272,245.1 L280,245.8 L288,247.4 L296,249.8 L304,252.7 L312,256.0 L320,259.4 L328,262.8 L336,265.8 L344,268.2 L352,270.0 L360,270.9 L368,270.9 L376,270.0 L384,268.3 L392,265.9 L400,262.9 L408,259.6 L416,256.1 L424,252.8 L432,249.9 L440,247.5 L448,245.9 L456,245.1 L464,245.2 L472,246.2 L480,248.0 L488,250.5 L496,253.5 L504,256.9 L512,260.3 L520,263.5 L528,266.4 L536,268.7 L544,270.3 L552,271.0 L560,270.8 L568,269.7 L576,267.8 L584,265.2 L592,262.1 L600,258.7 L608,255.3 L616,252.1 L624,249.2 L632,247.0 L640,245.6 L648,245.0 L656,245.3 L664,246.5 L672,248.5 L680,251.2 L688,254.3 L696,257.7 L704,261.1 L712,264.3 L720,267.1 L728,269.2 L736,270.5 L744,271.0 L752,270.6 L760,269.3 L768,267.2 L776,264.4 L784,261.3 L792,257.9 L800,254.5 L808,251.3 L816,248.6 L824,246.6 L832,245.4 L840,245.0 L848,245.6 L856,247.0 L864,249.1 L872,251.9 L880,255.2 L888,258.6 L896,261.9 L904,265.1 L912,267.7 L920,269.6 L928,270.7 L936,271.0 L944,270.3 L952,268.8 L960,266.5" stroke="#ff2daa" stroke-opacity="0.5"/>
+    <path d="M0,246.7 L8,245.4 L16,245.0 L24,245.5 L32,246.8 L40,248.9 L48,251.7 L56,254.9 L64,258.3 L72,261.7 L80,264.8 L88,267.5 L96,269.5 L104,270.7 L112,271.0 L120,270.4 L128,269.0 L136,266.8 L144,263.9 L152,260.7 L160,257.3 L168,253.9 L176,250.8 L184,248.2 L192,246.3 L200,245.2 L208,245.0 L216,245.7 L224,247.3 L232,249.6 L240,252.5 L248,255.7 L256,259.1 L264,262.5 L272,265.5 L280,268.0 L288,269.8 L296,270.8 L304,270.9 L312,270.1 L320,268.5 L328,266.1 L336,263.2 L344,259.9 L352,256.4 L360,253.1 L368,250.1 L376,247.7 L384,246.0 L392,245.1 L400,245.1 L408,246.0 L416,247.8 L424,250.2 L432,253.2 L440,256.6 L448,260.0 L456,263.3 L464,266.2 L472,268.6 L480,270.2 L488,270.9 L496,270.8 L504,269.8 L512,267.9 L520,265.4 L528,262.4 L536,259.0 L544,255.6 L552,252.3 L560,249.5 L568,247.2 L576,245.7 L584,245.0 L592,245.3 L600,246.4 L608,248.3 L616,250.9 L624,254.1 L632,257.4 L640,260.8 L648,264.1 L656,266.9 L664,269.0 L672,270.4 L680,271.0 L688,270.6 L696,269.4 L704,267.4 L712,264.7 L720,261.5 L728,258.1 L736,254.7 L744,251.6 L752,248.8 L760,246.7 L768,245.4 L776,245.0 L784,245.5 L792,246.8 L800,248.9 L808,251.7 L816,254.9 L824,258.3 L832,261.7 L840,264.8 L848,267.5 L856,269.5 L864,270.7 L872,271.0 L880,270.4 L888,269.0 L896,266.8 L904,263.9 L912,260.7 L920,257.3 L928,253.9 L936,250.8 L944,248.2 L952,246.3 L960,245.2" stroke="#ffb300" stroke-opacity="0.45"/>
+  </g>
+
+  <!-- scanline sweep -->
+  <rect y="0" width="960" height="300" fill="url(#fade)" opacity="0.05"/>
+  <line x1="0" y1="148" x2="960" y2="148" stroke="#00f0ff" stroke-opacity="0.12" stroke-width="1"/>
+  <line x1="0" y1="238" x2="960" y2="238" stroke="#ff2daa" stroke-opacity="0.12" stroke-width="1"/>
+</svg>

@@ -4,168 +4,666 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fabio S. Stella | R&D Firmware Engineer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
+  <meta name="description" content="GEDANKENN — R&D Firmware Engineer. Embedded systems, low-level software, Linux. Close to the metal." />
+  <meta name="theme-color" content="#05060f" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305060f'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='18' fill='%2300f0ff' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Fira Code', monospace;
+    :root {
+      --bg: #05060f;
+      --bg2: #0a0d1f;
+      --cyan: #00f0ff;
+      --magenta: #ff2daa;
+      --violet: #8b5cf6;
+      --amber: #ffb300;
+      --text: #d8d8ec;
+      --muted: #8a8aa8;
+      --line: #1b1b3a;
+      --glass: rgba(13, 15, 34, 0.62);
     }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      background-color: #0f0f0f;
-      color: #f0f0f0;
-      padding: 2rem;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    h1 {
-      font-size: 2.5rem;
-    }
-    .subtitle {
-      font-size: 1.2rem;
-      color: #66ffcc;
-      margin-top: 0.5rem;
-    }
-    section {
-      max-width: 850px;
-      margin: 0 auto 2.5rem;
-    }
-    h2 {
-      color: #66ffcc;
-      margin-bottom: 0.5rem;
-    }
-    p, li {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Fira Code', monospace;
       line-height: 1.6;
+      overflow-x: hidden;
     }
-    a {
-      color: #66ffcc;
-      text-decoration: none;
+    ::selection { background: var(--magenta); color: #05060f; }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #1e1e45; border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+    /* ---- backdrop ---- */
+    #bg-grid {
+      position: fixed; inset: 0; z-index: -3;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 240, 255, 0.08), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 110%, rgba(255, 45, 170, 0.07), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 5% 100%, rgba(139, 92, 246, 0.06), transparent 60%);
+      background-color: var(--bg);
     }
-    a:hover {
-      text-decoration: underline;
+    #bg-grid::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 85%);
     }
-    .socials {
-      text-align: center;
-      margin-top: 1.5rem;
+    #canvas { position: fixed; inset: 0; z-index: -2; opacity: 0.5; }
+    #scanlines {
+      position: fixed; inset: 0; z-index: 999; pointer-events: none; opacity: 0.5;
+      background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px);
+      mix-blend-mode: overlay;
     }
-    .socials a {
-      margin: 0 1rem;
+
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---- boot overlay ---- */
+    #boot {
+      position: fixed; inset: 0; z-index: 1000;
+      background: #03040a;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s;
     }
-    .metrics {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      margin-top: 1.5rem;
-      gap: 1rem;
+    #boot.done { opacity: 0; visibility: hidden; }
+    #boot pre {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px; line-height: 1.8; color: var(--cyan);
+      text-shadow: 0 0 8px rgba(0, 240, 255, 0.55);
+      white-space: pre-wrap; max-width: 680px; padding: 24px;
+      border: 1px solid var(--line); border-radius: 10px;
+      background: rgba(10, 13, 31, 0.9);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.08), inset 0 0 30px rgba(0, 240, 255, 0.04);
     }
-    .metric-box {
-      background-color: #1a1a1a;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(102, 255, 204, 0.15);
-      min-width: 180px;
+    #boot .cursor { animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ---- nav ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(5, 6, 15, 0.75); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
     }
-    .metric-number {
-      font-size: 2rem;
-      color: #66ffcc;
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+    .brand { font-family: 'Orbitron', sans-serif; font-weight: 700; letter-spacing: 3px; color: var(--cyan); text-decoration: none; text-shadow: 0 0 12px rgba(0,240,255,0.4); }
+    .brand .dot { color: var(--magenta); }
+    nav ul { display: flex; gap: 26px; list-style: none; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 1px; transition: color 0.25s; }
+    nav a:hover { color: var(--cyan); }
+
+    /* ---- hero ---- */
+    header.hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      position: relative; padding-top: 58px;
     }
-    .metric-label {
-      font-size: 0.95rem;
-      color: #ccc;
+    .hero-status {
+      font-size: 12px; letter-spacing: 2px; color: var(--muted);
+      margin-bottom: 14px; font-family: 'Share Tech Mono', monospace;
     }
+    .hero-status .ok { color: #34d399; }
+    .glitch {
+      font-family: 'Orbitron', sans-serif; font-weight: 900;
+      font-size: clamp(3rem, 9vw, 6.4rem); letter-spacing: 8px; color: var(--cyan);
+      position: relative; text-shadow: 0 0 24px rgba(0,240,255,0.35);
+      animation: flicker 6s infinite;
+    }
+    .glitch::before, .glitch::after {
+      content: attr(data-text); position: absolute; inset: 0; overflow: hidden;
+    }
+    .glitch::before {
+      color: var(--magenta); transform: translate(-3px, -2px);
+      clip-path: inset(0 0 55% 0); opacity: 0.8; animation: glitchA 3.2s infinite linear alternate-reverse;
+    }
+    .glitch::after {
+      color: var(--violet); transform: translate(3px, 2px);
+      clip-path: inset(55% 0 0 0); opacity: 0.8; animation: glitchB 2.7s infinite linear alternate-reverse;
+    }
+    @keyframes glitchA { 0% { clip-path: inset(0 0 55% 0); } 20% { clip-path: inset(20% 0 65% 0); } 40% { clip-path: inset(60% 0 10% 0); } 100% { clip-path: inset(80% 0 5% 0); } }
+    @keyframes glitchB { 0% { clip-path: inset(55% 0 0 0); } 25% { clip-path: inset(80% 0 10% 0); } 50% { clip-path: inset(15% 0 75% 0); } 100% { clip-path: inset(5% 0 90% 0); } }
+    @keyframes flicker { 0%, 91%, 95%, 100% { opacity: 1; } 92% { opacity: 0.6; } 93% { opacity: 1; } }
+    .hero-role {
+      font-size: clamp(1rem, 2.4vw, 1.4rem); color: var(--magenta);
+      font-family: 'Share Tech Mono', monospace; margin-top: 16px; height: 1.8em;
+      letter-spacing: 2px; text-shadow: 0 0 14px rgba(255,45,170,0.4);
+    }
+    .hero-role .cursor { display: inline-block; width: 0.6em; background: var(--cyan); animation: blink 1s step-end infinite; color: transparent; }
+    .hero-tag { margin-top: 22px; color: var(--muted); font-size: 15px; max-width: 560px; }
+    .hero-tag b { color: var(--cyan); font-weight: 500; }
+    .hero-cta { margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 12px 22px; font-size: 13px; letter-spacing: 1.5px;
+      font-family: 'Fira Code', monospace; color: var(--bg); text-decoration: none;
+      background: var(--cyan); border: 1px solid var(--cyan); font-weight: 600;
+      transition: all 0.25s; box-shadow: 0 0 18px rgba(0,240,255,0.25);
+    }
+    .btn:hover { background: transparent; color: var(--cyan); box-shadow: 0 0 26px rgba(0,240,255,0.5); transform: translateY(-2px); }
+    .btn.ghost { background: transparent; color: var(--magenta); border-color: var(--magenta); box-shadow: 0 0 18px rgba(255,45,170,0.2); }
+    .btn.ghost:hover { background: var(--magenta); color: #05060f; box-shadow: 0 0 26px rgba(255,45,170,0.5); }
+
+    .hero-bar {
+      margin-top: 64px; border: 1px solid var(--line); background: var(--glass);
+      backdrop-filter: blur(8px); border-radius: 8px; overflow: hidden;
+      font-family: 'Share Tech Mono', monospace; font-size: 13px;
+    }
+    .hero-bar .bar-title { padding: 8px 16px; border-bottom: 1px solid var(--line); color: var(--muted); background: rgba(0,240,255,0.03); }
+    .hero-bar .bar-title .pulse { color: #34d399; animation: blink 1.6s step-end infinite; }
+    .hero-bar .row { display: flex; flex-wrap: wrap; gap: 4px 28px; padding: 12px 16px; color: var(--muted); }
+    .hero-bar .row b { color: var(--cyan); font-weight: 400; }
+    .hero-bar .row .m { color: var(--magenta); }
+    .hero-scroll { margin: 48px auto 0; text-align: center; color: var(--muted); font-size: 12px; letter-spacing: 3px; animation: blink 2s step-end infinite; }
+
+    /* ---- sections ---- */
+    section { padding: 96px 0 40px; }
+    .sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 40px; }
+    .sec-head .idx { color: var(--magenta); font-family: 'Share Tech Mono', monospace; font-size: 14px; }
+    .sec-head h2 { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 3px; color: var(--text); }
+    .sec-head h2 span { color: var(--cyan); }
+    .sec-head::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--line), transparent); }
+
+    .card {
+      background: var(--glass); border: 1px solid var(--line); border-radius: 10px;
+      padding: 26px; backdrop-filter: blur(8px);
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+      background: linear-gradient(var(--cyan), var(--magenta)); opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(0,240,255,0.5); box-shadow: 0 8px 30px rgba(0,240,255,0.12); }
+    .card:hover::before { opacity: 1; }
+
+    /* about */
+    .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 22px; }
+    .terminal { font-family: 'Share Tech Mono', monospace; font-size: 14px; }
+    .terminal .t-cmd { color: var(--cyan); }
+    .terminal .t-out { color: var(--text); }
+    .terminal .t-dim { color: var(--muted); }
+    .terminal .t-mag { color: var(--magenta); }
+    .terminal .line { margin-bottom: 10px; }
+    .terminal .cursor { background: var(--cyan); display: inline-block; width: 8px; height: 15px; vertical-align: middle; animation: blink 1s step-end infinite; }
+
+    /* focus */
+    .focus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+    .focus-grid .item { font-size: 13.5px; color: var(--text); }
+    .focus-grid .item .tag { color: var(--cyan); font-family: 'Share Tech Mono', monospace; margin-right: 8px; }
+    .focus-grid .item:hover .tag { color: var(--magenta); }
+
+    /* metrics */
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px; }
+    .metric { text-align: center; padding: 28px 16px; }
+    .metric .num {
+      font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 2.3rem;
+      color: var(--cyan); text-shadow: 0 0 20px rgba(0,240,255,0.35);
+    }
+    .metric .num .suffix { color: var(--magenta); }
+    .metric .lbl { margin-top: 8px; font-size: 12px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; }
+
+    /* stack */
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+    .stack-group h4 { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; letter-spacing: 2px; color: var(--violet); margin-bottom: 16px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+    .chip {
+      font-family: 'Share Tech Mono', monospace; font-size: 12.5px; letter-spacing: 1px;
+      padding: 6px 13px; border: 1px solid var(--line); border-radius: 4px; color: var(--text);
+      transition: all 0.25s; background: rgba(10,13,31,0.5);
+    }
+    .chip:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 14px rgba(0,240,255,0.25); transform: translateY(-2px); }
+    .chip.c { border-color: rgba(0,240,255,0.4); color: var(--cyan); }
+    .chip.m { border-color: rgba(255,45,170,0.4); color: #ff7cc9; }
+    .chip.v { border-color: rgba(139,92,246,0.4); color: #b79cff; }
+    .chip.a { border-color: rgba(255,179,0,0.4); color: #ffd166; }
+    .chip.t { border-color: rgba(45,212,191,0.4); color: #5eead4; }
+
+    /* projects */
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+    .proj { display: flex; flex-direction: column; }
+    .proj .p-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .proj .p-top .ico { color: var(--magenta); font-size: 20px; }
+    .proj .p-top .stars { color: var(--amber); font-size: 12.5px; font-family: 'Share Tech Mono', monospace; }
+    .proj h3 { font-size: 1.05rem; color: var(--cyan); margin-bottom: 8px; font-weight: 600; }
+    .proj p { font-size: 13.5px; color: var(--muted); flex: 1; }
+    .proj .tags { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .proj .tags span { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--violet); border: 1px solid rgba(139,92,246,0.35); padding: 3px 8px; border-radius: 3px; }
+    .proj a { color: inherit; text-decoration: none; }
+    .proj a:hover { color: var(--cyan); }
+    .more { margin-top: 26px; text-align: center; font-size: 13px; color: var(--muted); }
+    .more a { color: var(--cyan); text-decoration: none; border-bottom: 1px dashed rgba(0,240,255,0.4); }
+    .more a:hover { color: var(--magenta); }
+
+    /* philosophy */
+    .philo { font-family: 'Share Tech Mono', monospace; font-size: 14.5px; }
+    .philo .row { padding: 11px 0; border-bottom: 1px dashed var(--line); color: var(--text); display: flex; gap: 14px; }
+    .philo .row:last-child { border-bottom: none; }
+    .philo .row .op { color: var(--muted); }
+    .philo .row .tx { color: var(--cyan); }
+    .philo .row .cm { color: var(--muted); font-style: italic; }
+
+    /* contact */
+    .contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .contact a { color: var(--text); text-decoration: none; display: block; }
+    .contact .c-ico { font-size: 20px; margin-bottom: 10px; color: var(--cyan); }
+    .contact a:hover { color: var(--cyan); }
+    .contact a:hover .c-ico { color: var(--magenta); }
+
     footer {
-      text-align: center;
-      margin-top: 4rem;
-      color: #888;
-      font-size: 0.9rem;
+      margin-top: 90px; padding: 34px 0; border-top: 1px solid var(--line);
+      text-align: center; font-size: 12.5px; color: var(--muted);
+      font-family: 'Share Tech Mono', monospace;
+    }
+    footer .clock { color: var(--cyan); margin-top: 8px; letter-spacing: 2px; }
+    footer .foot-heart { color: var(--magenta); }
+
+    /* reveal */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+
+    @media (max-width: 760px) {
+      nav ul { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .glitch { letter-spacing: 4px; }
     }
   </style>
 </head>
 <body>
+  <div id="bg-grid"></div>
+  <canvas id="canvas"></canvas>
+  <div id="scanlines"></div>
 
-  <div style="text-align:center; margin-bottom: 2rem;">
-    <a href="https://git.io/typing-svg">
-      <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&duration=2000&pause=100&center=true&vCenter=true&multiline=true&width=720&height=175&lines=GUIs+are+a+lie%2C+they+are+just+front-ends+to+the+shell.;Through+the+shell%2C+I+gain+sudo.;Through+sudo%2C+I+gain+power.;Through+power%2C+I+gain+root.;Through+root%2C+my+chains+are+broken.;uid%3D0+shall+set+me+free...." alt="Typing SVG" />
-    </a>
+  <!-- boot sequence -->
+  <div id="boot">
+    <pre id="bootText"></pre>
   </div>
 
-  <header>
-    <h1>Fabio S. Stella</h1>
-    <div class="subtitle">R&D Firmware Engineer • Embedded Systems • Linux Power User</div>
-  </header>
-
-  <section>
-    <h2>About Me</h2>
-    <p>
-      I'm Fabio, a Computer Engineer working with R&D-oriented embedded systems, specialized in firmware, low-level software, and hardware–software co-design.
-      I currently work at <strong>Autenpro</strong>, developing embedded solutions for agricultural machinery, focused on sensing, automation, and real-time control.
-      <br><br>
-      I work close to the hardware: system bring-up, driver development, communication stacks, and firmware architecture.
-      Comfortable with oscilloscopes, logic analyzers, datasheets, and Linux terminals.
-    </p>
-  </section>
-
-  <section>
-    <h2>Technical Focus</h2>
-    <p>
-      Firmware architecture • Bare-metal & RTOS • Drivers & BSPs • Hardware bring-up • Sensor integration • Real-time control • OTA & bootloaders • Embedded networking • Linux-based development
-    </p>
-  </section>
-
-  <section>
-    <h2>Engineering Snapshot</h2>
-    <div class="metrics">
-      <div class="metric-box">
-        <div class="metric-number">5+ yrs</div>
-        <div class="metric-label">Embedded R&D</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-number">40+</div>
-        <div class="metric-label">Boards Brought Up</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-number">10+</div>
-        <div class="metric-label">Systems Shipped</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-number">20k+</div>
-        <div class="metric-label">Firmware LOC</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-number">0</div>
-        <div class="metric-label">Fear of Datasheets</div>
-      </div>
+  <nav>
+    <div class="wrap">
+      <a class="brand" href="#top">GEDANKENN<span class="dot">_</span></a>
+      <ul>
+        <li><a href="#about">whoami</a></li>
+        <li><a href="#focus">focus</a></li>
+        <li><a href="#metrics">metrics</a></li>
+        <li><a href="#stack">stack</a></li>
+        <li><a href="#projects">projects</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
     </div>
-  </section>
+  </nav>
 
-  <section>
-    <h2>Selected Projects</h2>
-    <ul>
-      <li><a href="https://github.com/Gedankenn/esp32_drivers" target="_blank">ESP32 Drivers</a> — Custom low-level drivers (ADC, PWM, GPIO)</li>
-      <li><a href="https://github.com/Gedankenn/file_transfer_python" target="_blank">IPv6 File Transfer</a> — Lightweight experimental transfer system</li>
-      <li><a href="https://github.com/Gedankenn/stocks" target="_blank">Terminal Stock Portfolio</a> — CLI system for data processing and visualization</li>
-      <li><a href="https://github.com/Gedankenn/arduino_temp_sensor" target="_blank">ESP8266 Sensor Platform</a> — Embedded data acquisition with local server</li>
-    </ul>
-  </section>
+  <main class="wrap" id="top">
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-status">[ SYSTEM <span class="ok">ONLINE</span> ] · AUTH <span class="ok">uid=0</span> · LOC: PATO BRANCO, BR</div>
+      <h1 class="glitch" data-text="GEDANKENN">GEDANKENN</h1>
+      <div class="hero-role" id="role"></div>
+      <p class="hero-tag">
+        Computer Engineer working on <b>R&amp;D embedded systems</b> at <b>ControlID</b> — firmware for agricultural
+        machinery. I build low-level software where <b>physics, electrons and code collide</b>. At home with
+        oscilloscopes, logic analyzers, datasheets and a Linux terminal.
+      </p>
+      <div class="hero-cta">
+        <a class="btn" href="https://github.com/Gedankenn" target="_blank" rel="noopener">VIEW PROJECTS</a>
+        <a class="btn ghost" href="mailto:fabioslikastella@gmail.com">CONTACT ME</a>
+      </div>
+      <div class="hero-bar">
+        <div class="bar-title"><span class="pulse">●</span> system.status</div>
+        <div class="row">
+          <span>ROLE: <b>R&amp;D FIRMWARE ENGINEER</b></span>
+          <span>COMPANY: <b>ControlID</b></span>
+          <span>DOMAIN: <b>AGRICULTURAL MACHINERY</b></span>
+          <span>OS: <b>ARCH LINUX</b></span>
+          <span>EDITOR: <b>NEOVIM</b></span>
+          <span>FEAR OF DATASHEETS: <b class="m">0</b></span>
+        </div>
+      </div>
+      <div class="hero-scroll">▼ SCROLL ▼</div>
+    </header>
 
-  <section>
-    <h2>Contact & Links</h2>
-    <div class="socials">
-      <a href="mailto:fabioslikastella@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/" target="_blank">LinkedIn</a>
-      <a href="https://github.com/Gedankenn" target="_blank">GitHub</a>
-      <a href="https://x.com/Th00rBeardedOne" target="_blank">X / Twitter</a>
-    </div>
-  </section>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="sec-head reveal"><span class="idx">[01]</span><h2>WHO<span>AMI</span></h2></div>
+      <div class="about-grid">
+        <div class="card terminal reveal">
+          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">whoami</span></div>
+          <div class="line"><span class="t-out">fabio — computer engineer @ controlid</span></div>
+          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">echo "$focus"</span></div>
+          <div class="line"><span class="t-out">firmware, low-level software, hw/sw co-design</span></div>
+          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">tools</span></div>
+          <div class="line"><span class="t-out">oscilloscope · logic analyzer · datasheet · shell</span></div>
+          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">philosophy</span></div>
+          <div class="line"><span class="t-out">close to the metal, <span class="t-mag">always</span></span></div>
+          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">status</span><span class="cursor"></span></div>
+        </div>
+        <div class="card reveal">
+          <p style="font-size:14px;color:var(--muted)">
+            R&amp;D work turns hardware into real products — reliable firmware from the register level up, and
+            unclear requirements into working systems.
+          </p>
+          <br />
+          <p style="font-size:14px;color:var(--muted)">
+            Comfortable with <span style="color:var(--cyan)">CAN/J1939</span>, <span style="color:var(--cyan)">RS485</span>,
+            <span style="color:var(--cyan)">I²C</span>, <span style="color:var(--cyan)">SPI</span>,
+            <span style="color:var(--cyan)">UART</span> and real-time control. Bootloaders, OTA, hardware bring-up and
+            board validation are the daily bread.
+          </p>
+          <br />
+          <p style="font-size:14px;color:var(--muted)">
+            Beyond work: personal firmware, PCB design in <span style="color:var(--cyan)">KiCad</span>, FOC motor
+            control, protocol analysis and a heavy dose of Linux.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOCUS -->
+    <section id="focus">
+      <div class="sec-head reveal"><span class="idx">[02]</span><h2>R&D <span>FOCUS</span></h2></div>
+      <div class="focus-grid">
+        <div class="card item reveal"><span class="tag">▸</span>Firmware architecture &amp; system bring-up</div>
+        <div class="card item reveal"><span class="tag">▸</span>Bare-metal &amp; RTOS development</div>
+        <div class="card item reveal"><span class="tag">▸</span>Drivers, HALs, BSPs &amp; bootloaders</div>
+        <div class="card item reveal"><span class="tag">▸</span>OTA update pipelines</div>
+        <div class="card item reveal"><span class="tag">▸</span>Hardware bring-up &amp; board validation</div>
+        <div class="card item reveal"><span class="tag">▸</span>Real-time control &amp; sensor integration</div>
+        <div class="card item reveal"><span class="tag">▸</span>Field protocols — CAN/J1939, RS485, I²C, SPI</div>
+        <div class="card item reveal"><span class="tag">▸</span>Embedded networking &amp; IPv6</div>
+        <div class="card item reveal"><span class="tag">▸</span>Linux-based development &amp; automation</div>
+      </div>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics">
+      <div class="sec-head reveal"><span class="idx">[03]</span><h2>ENGINEERING <span>METRICS</span></h2></div>
+      <div class="metrics">
+        <div class="card metric reveal"><div class="num"><span data-count="5">0</span><span class="suffix">+</span></div><div class="lbl">Years in Embedded R&amp;D</div></div>
+        <div class="card metric reveal"><div class="num"><span data-count="40">0</span><span class="suffix">+</span></div><div class="lbl">Boards Brought Up</div></div>
+        <div class="card metric reveal"><div class="num"><span data-count="10">0</span><span class="suffix">+</span></div><div class="lbl">Systems Shipped</div></div>
+        <div class="card metric reveal"><div class="num"><span data-count="20">0</span><span class="suffix">k+</span></div><div class="lbl">Firmware LOC</div></div>
+        <div class="card metric reveal"><div class="num"><span>0</span></div><div class="lbl">Fear of Datasheets</div></div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack">
+      <div class="sec-head reveal"><span class="idx">[04]</span><h2>TOOL<span>CHAIN</span></h2></div>
+      <div class="stack-grid">
+        <div class="card stack-group reveal">
+          <h4>LANGUAGES</h4>
+          <div class="chips">
+            <span class="chip c">C</span><span class="chip m">C++</span><span class="chip a">Python</span>
+            <span class="chip v">Bash</span><span class="chip a">Assembly</span><span class="chip t">Lua</span>
+          </div>
+        </div>
+        <div class="card stack-group reveal">
+          <h4>MCUs</h4>
+          <div class="chips">
+            <span class="chip c">ESP32</span><span class="chip t">STM32</span><span class="chip a">AVR</span>
+          </div>
+        </div>
+        <div class="card stack-group reveal">
+          <h4>INTERFACES</h4>
+          <div class="chips">
+            <span class="chip c">SPI</span><span class="chip m">I²C</span><span class="chip v">UART</span>
+            <span class="chip a">CAN</span><span class="chip t">PWM</span><span class="chip m">ADC</span><span class="chip t">Ethernet</span>
+          </div>
+        </div>
+        <div class="card stack-group reveal">
+          <h4>TOOLING</h4>
+          <div class="chips">
+            <span class="chip c">Linux</span><span class="chip c">ESP-IDF</span><span class="chip v">GDB</span>
+            <span class="chip m">OpenOCD</span><span class="chip t">KiCad</span><span class="chip c">Docker</span>
+            <span class="chip m">Git</span><span class="chip t">Neovim</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="sec-head reveal"><span class="idx">[05]</span><h2>SELECTED <span>PROJECTS</span></h2></div>
+      <div class="proj-grid">
+        <div class="card proj reveal">
+          <a href="https://github.com/Gedankenn/ESP32-FOC" target="_blank" rel="noopener">
+            <div class="p-top"><span class="ico">▣</span><span class="stars">★ 10</span></div>
+            <h3>ESP32-FOC</h3>
+            <p>Field-Oriented Control of BLDC motors on the ESP32 — torque, speed and position control at the register level.</p>
+            <div class="tags"><span>ESP32</span><span>C</span><span>FOC</span><span>Motor Control</span></div>
+          </a>
+        </div>
+        <div class="card proj reveal">
+          <a href="https://github.com/Gedankenn/OTPC" target="_blank" rel="noopener">
+            <div class="p-top"><span class="ico">▣</span><span class="stars">NEW</span></div>
+            <h3>OTPC</h3>
+            <p>Open Traction PMSM Controller — power-stage firmware for permanent-magnet synchronous motor traction.</p>
+            <div class="tags"><span>PMSM</span><span>Python</span><span>Control</span></div>
+          </a>
+        </div>
+        <div class="card proj reveal">
+          <a href="https://github.com/Gedankenn/power_profiller" target="_blank" rel="noopener">
+            <div class="p-top"><span class="ico">▣</span><span class="stars">★ 4</span></div>
+            <h3>Power Profiler</h3>
+            <p>Real-time energy profiling for battery-powered electronics — ESP32 + INA226, live Chart.js dashboard, burst analysis.</p>
+            <div class="tags"><span>ESP-IDF</span><span>INA226</span><span>I²C</span></div>
+          </a>
+        </div>
+        <div class="card proj reveal">
+          <a href="https://github.com/Gedankenn/mysocket" target="_blank" rel="noopener">
+            <div class="p-top"><span class="ico">▣</span><span class="stars">★ 4</span></div>
+            <h3>mysocket</h3>
+            <p>Own socket wrapper in C for study and development — a minimal, fast networking layer with no legacy baggage.</p>
+            <div class="tags"><span>C</span><span>Sockets</span><span>Networking</span></div>
+          </a>
+        </div>
+        <div class="card proj reveal">
+          <a href="https://github.com/Gedankenn/3-phase-inverter" target="_blank" rel="noopener">
+            <div class="p-top"><span class="ico">▣</span><span class="stars">WIP</span></div>
+            <h3>3-Phase Inverter</h3>
+            <p>Study and implementation of a 3-phase inverter module for motor drive applications.</p>
+            <div class="tags"><span>Power</span><span>Inverter</span><span>Control</span></div>
+          </a>
+        </div>
+        <div class="card proj reveal">
+          <a href="https://github.com/Gedankenn/esp32_bootloader" target="_blank" rel="noopener">
+            <div class="p-top"><span class="ico">▣</span><span class="stars">WIP</span></div>
+            <h3>esp32_bootloader</h3>
+            <p>Custom bootloader work for the ESP32 — OTA-capable firmware update paths.</p>
+            <div class="tags"><span>ESP32</span><span>Bootloader</span><span>OTA</span></div>
+          </a>
+        </div>
+      </div>
+      <p class="more">
+        More: <a href="https://github.com/Gedankenn/esp32_drivers" target="_blank" rel="noopener">esp32_drivers</a> ·
+        <a href="https://github.com/Gedankenn/esp32_wattimeter" target="_blank" rel="noopener">esp32_wattimeter</a> ·
+        <a href="https://github.com/Gedankenn/file_transfer_python" target="_blank" rel="noopener">file_transfer_python</a> ·
+        <a href="https://github.com/Gedankenn/stocks" target="_blank" rel="noopener">stocks</a> ·
+        <a href="https://github.com/Gedankenn/simulador-b3" target="_blank" rel="noopener">simulador-b3</a> ·
+        <a href="https://github.com/Gedankenn" target="_blank" rel="noopener">all repos →</a>
+      </p>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section id="philosophy">
+      <div class="sec-head reveal"><span class="idx">[06]</span><h2>ENGINEERING <span>PHILOSOPHY</span></h2></div>
+      <div class="card philo reveal">
+        <div class="row"><span class="op">▸</span><span class="tx">understand the system before optimizing it</span><span class="cm"># measure first</span></div>
+        <div class="row"><span class="op">▸</span><span class="tx">measure before guessing</span><span class="cm"># trust the scope</span></div>
+        <div class="row"><span class="op">▸</span><span class="tx">read the datasheet</span><span class="cm"># it is the law</span></div>
+        <div class="row"><span class="op">▸</span><span class="tx">respect physics</span><span class="cm"># you cannot negotiate</span></div>
+        <div class="row"><span class="op">▸</span><span class="tx">automate everything repeatable</span><span class="cm"># scripts > humans</span></div>
+        <div class="row"><span class="op">▸</span><span class="tx">keep firmware boring and reliable</span><span class="cm"># stable wins</span></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="sec-head reveal"><span class="idx">[07]</span><h2>OPEN A <span>CHANNEL</span></h2></div>
+      <div class="contact-cards contact">
+        <div class="card reveal">
+          <a href="mailto:fabioslikastella@gmail.com"><span class="c-ico">✉</span>EMAIL<br /><span style="font-size:12.5px;color:var(--muted)">fabioslikastella@gmail.com</span></a>
+        </div>
+        <div class="card reveal">
+          <a href="https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/" target="_blank" rel="noopener"><span class="c-ico">in</span>LINKEDIN<br /><span style="font-size:12.5px;color:var(--muted)">/fabio-slika-stella</span></a>
+        </div>
+        <div class="card reveal">
+          <a href="https://x.com/Th00rBeardedOne" target="_blank" rel="noopener"><span class="c-ico">✕</span>X / TWITTER<br /><span style="font-size:12.5px;color:var(--muted)">@Th00rBeardedOne</span></a>
+        </div>
+        <div class="card reveal">
+          <a href="https://github.com/Gedankenn" target="_blank" rel="noopener"><span class="c-ico">⌥</span>GITHUB<br /><span style="font-size:12.5px;color:var(--muted)">/Gedankenn</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2026 Fabio S. Stella — R&D Firmware • Close to the metal ⚙️ fueled by coffee ☕
+    © 2026 Fabio S. Stella — R&D Firmware Engineer · Close to the metal <span class="foot-heart">⚙</span> fueled by coffee ☕
+    <div class="clock" id="clock">UTC --:--:--</div>
   </footer>
 
+  <script>
+    /* ---------- boot sequence ---------- */
+    (function () {
+      const lines = [
+        "GEDANKENN SYSTEMS v5.5 // embedded edition",
+        "> bios ...... ok",
+        "> kernel .... linux (arch) — low-latency",
+        "> toolchain . gcc / clang / gdb / openocd",
+        "> probes .... i2c[ok] spi[ok] uart[ok] can[ok]",
+        "> trust .... uid=0 granted",
+        "> shell ..... ready. close to the metal.",
+        "",
+        "boot in 3... 2... 1..."
+      ];
+      const el = document.getElementById("bootText");
+      const boot = document.getElementById("boot");
+      let li = 0, ci = 0;
+      function typeLine() {
+        if (li >= lines.length) {
+          setTimeout(() => boot.classList.add("done"), 600);
+          return;
+        }
+        const line = lines[li];
+        el.textContent = lines.slice(0, li).join("\n") + "\n" + line.slice(0, ci + 1) + "█";
+        ci++;
+        if (ci <= line.length) {
+          setTimeout(typeLine, li === lines.length - 1 ? 90 : 16);
+        } else {
+          el.textContent = lines.slice(0, li + 1).join("\n");
+          ci = 0; li++;
+          setTimeout(typeLine, li === lines.length - 1 ? 240 : 60);
+        }
+      }
+      setTimeout(typeLine, 350);
+    })();
+
+    /* ---------- typed roles ---------- */
+    const roles = [
+      "R&D FIRMWARE ENGINEER",
+      "EMBEDDED SYSTEMS",
+      "LINUX POWER USER",
+      "CLOSE TO THE METAL"
+    ];
+    const roleEl = document.getElementById("role");
+    let ri = 0, rci = 0, deleting = false;
+    function typeRole() {
+      const word = roles[ri];
+      const speed = deleting ? 40 : 90;
+      if (!deleting) {
+        rci++;
+        roleEl.textContent = word.slice(0, rci) + '<span class="cursor">&nbsp;</span>';
+        if (rci === word.length) { deleting = true; setTimeout(typeRole, 1700); return; }
+      } else {
+        rci--;
+        roleEl.textContent = word.slice(0, rci) + '<span class="cursor">&nbsp;</span>';
+        if (rci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+      }
+      setTimeout(typeRole, speed);
+    }
+    setTimeout(typeRole, 3200);
+
+    /* ---------- count-up ---------- */
+    function animateCount(el) {
+      const target = parseInt(el.dataset.count, 10);
+      const dur = 1200;
+      const t0 = performance.now();
+      function step(t) {
+        const p = Math.min((t - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(eased * target);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    /* ---------- reveal + count on scroll ---------- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("on");
+        e.target.querySelectorAll("[data-count]").forEach(animateCount);
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    /* ---------- particles ---------- */
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    let W, H, parts;
+    const N = 55;
+    function resize() {
+      W = canvas.width = innerWidth;
+      H = canvas.height = innerHeight;
+    }
+    function spawn() {
+      parts = Array.from({ length: N }, () => ({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.6 + 0.4,
+        c: Math.random() < 0.5 ? "0,240,255" : "255,45,170"
+      }));
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of parts) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.c},0.75)`;
+        ctx.fill();
+      }
+      for (let i = 0; i < parts.length; i++) {
+        for (let j = i + 1; j < parts.length; j++) {
+          const a = parts[i], b = parts[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.hypot(dx, dy);
+          if (d < 110) {
+            ctx.strokeStyle = `rgba(0,240,255,${(1 - d / 110) * 0.14})`;
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    resize(); spawn(); draw();
+    addEventListener("resize", () => { resize(); spawn(); });
+
+    /* ---------- clock ---------- */
+    const clockEl = document.getElementById("clock");
+    function tick() {
+      clockEl.textContent = "UTC " + new Date().toISOString().slice(11, 19);
+    }
+    tick(); setInterval(tick, 1000);
+  </script>
 </body>
 </html>
-
