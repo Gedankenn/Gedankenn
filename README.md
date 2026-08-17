@@ -53,12 +53,17 @@ close_to_the_metal()
 ![Bash](https://img.shields.io/badge/Bash-8b5cf6?style=flat-square&logo=gnubash&logoColor=05060f)
 ![Assembly](https://img.shields.io/badge/Assembly-f97316?style=flat-square)
 ![Lua](https://img.shields.io/badge/Lua-34d399?style=flat-square&logo=lua&logoColor=05060f)
+![JavaScript](https://img.shields.io/badge/JavaScript-fbbf24?style=flat-square&logo=javascript&logoColor=05060f)
+![TypeScript](https://img.shields.io/badge/TypeScript-38bdf8?style=flat-square&logo=typescript&logoColor=05060f)
+![Rust](https://img.shields.io/badge/Rust-f97316?style=flat-square&logo=rust&logoColor=05060f)
+![QML](https://img.shields.io/badge/QML-34d399?style=flat-square)
 
 **MCUs**
 
 ![ESP32](https://img.shields.io/badge/ESP32-38bdf8?style=flat-square&logo=espressif&logoColor=05060f)
 ![STM32](https://img.shields.io/badge/STM32-2dd4bf?style=flat-square)
 ![AVR](https://img.shields.io/badge/AVR-fbbf24?style=flat-square)
+![Raspberry Pi](https://img.shields.io/badge/Raspberry_Pi-a78bfa?style=flat-square&logo=raspberrypi&logoColor=05060f)
 
 **Interfaces**
 
@@ -69,15 +74,21 @@ close_to_the_metal()
 ![PWM](https://img.shields.io/badge/PWM-34d399?style=flat-square)
 ![ADC](https://img.shields.io/badge/ADC-f43f5e?style=flat-square)
 ![Ethernet](https://img.shields.io/badge/Ethernet-2dd4bf?style=flat-square)
+![I2S](https://img.shields.io/badge/I2S-00f0ff?style=flat-square)
 
-**Tooling**
+**Frameworks & Tooling**
 
 ![Linux](https://img.shields.io/badge/Linux-22d3ee?style=flat-square&logo=linux&logoColor=05060f)
 ![ESP-IDF](https://img.shields.io/badge/ESP--IDF-38bdf8?style=flat-square&logo=espressif&logoColor=05060f)
+![FreeRTOS](https://img.shields.io/badge/FreeRTOS-2dd4bf?style=flat-square)
+![Django](https://img.shields.io/badge/Django-0ea5e9?style=flat-square&logo=django&logoColor=05060f)
+![FastAPI](https://img.shields.io/badge/FastAPI-34d399?style=flat-square&logo=fastapi&logoColor=05060f)
+![Docker](https://img.shields.io/badge/Docker-0ea5e9?style=flat-square&logo=docker&logoColor=05060f)
+![KiCad](https://img.shields.io/badge/KiCad-34d399?style=flat-square)
+![Tauri](https://img.shields.io/badge/Tauri-2dd4bf?style=flat-square&logo=tauri&logoColor=05060f)
+![PyTorch](https://img.shields.io/badge/PyTorch-f43f5e?style=flat-square&logo=pytorch&logoColor=05060f)
 ![GDB](https://img.shields.io/badge/GDB-a78bfa?style=flat-square)
 ![OpenOCD](https://img.shields.io/badge/OpenOCD-f472b6?style=flat-square)
-![KiCad](https://img.shields.io/badge/KiCad-34d399?style=flat-square)
-![Docker](https://img.shields.io/badge/Docker-0ea5e9?style=flat-square&logo=docker&logoColor=05060f)
 ![Git](https://img.shields.io/badge/Git-f43f5e?style=flat-square&logo=git&logoColor=05060f)
 ![Neovim](https://img.shields.io/badge/Neovim-34d399?style=flat-square&logo=neovim&logoColor=05060f)
 
@@ -91,20 +102,67 @@ close_to_the_metal()
   <img src="https://streak-stats.demolab.com/?user=Gedankenn&background=0a0d1f&hide_border=true&ring=00f0ff&fire=ff2daa&currStreakNum=00f0ff&currStreakLabel=ff2daa&sideNums=c9c9e0&sideLabels=8a8aa8&dates=5c5c7a" alt="GitHub Streak" width="72%">
 </p>
 
-## 🚀 Featured R&D Projects
+---
 
-| Project | What it is | |
+## 🚀 Projects
+
+> `★` public on GitHub · `◎` local / early stage
+
+### ⚙️ Embedded & Firmware
+
+| | Project | Description |
 |---|---|---|
-| [**ESP32-FOC**](https://github.com/Gedankenn/ESP32-FOC) | Field-Oriented Control of BLDC motors on ESP32 | ★ 10 |
-| [**OTPC**](https://github.com/Gedankenn/OTPC) | Open Traction PMSM Controller | new |
-| [**power_profiller**](https://github.com/Gedankenn/power_profiller) | Real-time energy profiling — ESP32 + INA226 | ★ 4 |
-| [**mysocket**](https://github.com/Gedankenn/mysocket) | Own socket wrapper in C | ★ 4 |
-| [**file_transfer_python**](https://github.com/Gedankenn/file_transfer_python) | File transfer over IPv6 | ★ 3 |
-| [**stocks**](https://github.com/Gedankenn/stocks) | Terminal stock portfolio | ★ 3 |
-| [**3-phase-inverter**](https://github.com/Gedankenn/3-phase-inverter) | 3-phase inverter module study | WIP |
-| [**esp32_bootloader**](https://github.com/Gedankenn/esp32_bootloader) | Custom ESP32 bootloader / OTA | WIP |
+| ★ | [**ESP32-FOC**](https://github.com/Gedankenn/ESP32-FOC) | Field-Oriented Control of BLDC motors on ESP32 |
+| ★ | [**OTPC**](https://github.com/Gedankenn/OTPC) | Open Traction PMSM Controller |
+| ★ | [**power_profiller**](https://github.com/Gedankenn/power_profiller) | Real-time energy profiling — ESP32 + INA226 |
+| ★ | [**esp32_drivers**](https://github.com/Gedankenn/esp32_drivers) | Custom ESP32 peripheral drivers |
+| ★ | [**esp32_wattimeter**](https://github.com/Gedankenn/esp32_wattimeter) | ESP32-based wattimeter |
+| ★ | [**esp32_bootloader**](https://github.com/Gedankenn/esp32_bootloader) | Custom ESP32 bootloader / OTA · WIP |
+| ★ | [**3-phase-inverter**](https://github.com/Gedankenn/3-phase-inverter) | 3-phase inverter module study · WIP |
+| ◎ | bt-headphone | Custom Bluetooth headphones — ESP32 + PCM5102A + TPA6132A2 spec & design |
 
-**More:** [esp32_drivers](https://github.com/Gedankenn/esp32_drivers) · [esp32_wattimeter](https://github.com/Gedankenn/esp32_wattimeter) · [simulador-b3](https://github.com/Gedankenn/simulador-b3) · [Kalman BLDC sim](https://github.com/Gedankenn/Python-Simulation-of-BLDC-motor-using-Kalman-Filter) · [FileTransfer](https://github.com/Gedankenn/FileTransfer)
+### 🔌 Hardware & PCB Design
+
+| | Project | Description |
+|---|---|---|
+| ★ | [**esp32_mini**](https://github.com/Gedankenn/esp32_mini) | Minimal ESP32-C3 dev board — KiCad PCB design |
+| ◎ | kicad | Dracula theme for KiCad |
+
+### 🤖 AI & Machine Learning
+
+| | Project | Description |
+|---|---|---|
+| ◎ | LuxTTS | High-performance TTS — voice cloning, 48kHz, 150x realtime, <1GB VRAM |
+| ◎ | MetaMe | Personal digital twin — clones communication style via Ollama LLM |
+| ◎ | mono | Configurable AI assistant framework — personas, CLI & web UI |
+
+### 🌐 Web Applications
+
+| | Project | Description |
+|---|---|---|
+| ★ | [**pato**](https://github.com/Gedankenn/pato) | PatoAgenda AI — WhatsApp chatbot for appointment scheduling |
+| ◎ | MyFinances | Personal finance app — Django + HTMX + AI advisor + bank sync |
+
+### 🔧 Tools & Utilities
+
+| | Project | Description |
+|---|---|---|
+| ★ | [**FileTransfer**](https://github.com/Gedankenn/FileTransfer) | Custom file transfer protocol over raw Ethernet — C |
+| ★ | [**mysocket**](https://github.com/Gedankenn/mysocket) | Own socket wrapper in C |
+| ◎ | ytDownload | YouTube video/audio downloader CLI — Python + yt-dlp |
+| ◎ | sigrok-ht6p20b-decoder | Sigrok/PulseView decoder for HT6P20B OOK encoder IC |
+| ◎ | raspi4 | Arch Linux ARM flash utility for Raspberry Pi 4 |
+
+### 📈 Data & Simulation
+
+| | Project | Description |
+|---|---|---|
+| ★ | [**Kalman BLDC sim**](https://github.com/Gedankenn/Python-Simulation-of-BLDC-motor-using-Kalman-Filter) | BLDC motor simulation with Kalman filter |
+| ★ | [**simulador-b3**](https://github.com/Gedankenn/simulador-b3) | B3 stock exchange simulator |
+| ★ | [**stocks**](https://github.com/Gedankenn/stocks) | Terminal stock portfolio |
+| ◎ | inmet_data | Brazil INMET weather data — parsing & visualization (2000–2026) |
+
+---
 
 ## 🧬 Philosophy
 
