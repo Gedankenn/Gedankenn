@@ -153,6 +153,18 @@ close_to_the_metal()
 | ◎ | sigrok-ht6p20b-decoder | Sigrok/PulseView decoder for HT6P20B OOK encoder IC |
 | ◎ | raspi4 | Arch Linux ARM flash utility for Raspberry Pi 4 |
 
+### 🐧 Linux & Desktop
+
+| | Project | Description |
+|---|---|---|
+| ★ | [**third-impact**](https://github.com/Gedankenn/third-impact) | Evangelion-inspired theme for Omarchy |
+| ★ | [**magi**](https://github.com/Gedankenn/magi) | Caelestia-style edge drawers & MAGI dashboard for Omarchy (QML) |
+| ★ | [**omaweather**](https://github.com/Gedankenn/omaweather) | Weather plugin for Omarchy |
+| ★ | [**oled-look**](https://github.com/Gedankenn/oled-look) | Hyprland OLED-like LCD grade — 6500 K screen shader |
+| ★ | [**nvim**](https://github.com/Gedankenn/nvim) | Personal Neovim config — Lua |
+| ★ | [**site-genner**](https://github.com/Gedankenn/site-genner) | Static site generator — TypeScript |
+
+
 ### 📈 Data & Simulation
 
 | | Project | Description |
