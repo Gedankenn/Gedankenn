@@ -8,7 +8,7 @@
   <a href="https://gedankenn.github.io/Gedankenn/"><img src="https://img.shields.io/badge/portfolio-gedankenn.github.io-F2B54A?style=for-the-badge&labelColor=263241" alt="Portfolio: gedankenn.github.io"></a>
   <a href="https://github.com/Gedankenn/Curriculo/blob/main/Curriculo_Fabio_Stella_EN.pdf"><img src="https://img.shields.io/badge/CV-English-1C2430?style=for-the-badge&labelColor=263241&color=1C2430" alt="CV (English)"></a>
   <a href="https://github.com/Gedankenn/Curriculo/blob/main/Curriculo_Fabio_Stella_PT.pdf"><img src="https://img.shields.io/badge/CV-Portugu%C3%AAs-1C2430?style=for-the-badge&labelColor=263241" alt="CV (Português)"></a>
-  <a href="https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/"><img src="https://img.shields.io/badge/LinkedIn-connect-1C2430?style=for-the-badge&logo=linkedin&logoColor=F2B54A&labelColor=263241" alt="LinkedIn"></a>
+  <a href="https://www.linkedin.com/in/fabio-stella/"><img src="https://img.shields.io/badge/LinkedIn-connect-1C2430?style=for-the-badge&logo=linkedin&logoColor=F2B54A&labelColor=263241" alt="LinkedIn"></a>
 </p>
 
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="assets/readme/h01-about-dark.svg"><source media="(prefers-color-scheme: light)" srcset="assets/readme/h01-about-light.svg"><img src="assets/readme/h01-about-dark.svg" alt="01 · About" width="100%"></picture></p>
@@ -103,7 +103,7 @@ I build low-level software where **physics, electrons and code collide**. My res
 
 <p align="center">
   <a href="mailto:fabioslikastella@gmail.com"><img src="https://img.shields.io/badge/email-fabioslikastella%40gmail.com-1C2430?style=for-the-badge&logo=gmail&logoColor=F2B54A&labelColor=263241" alt="Email: fabioslikastella@gmail.com"></a>
-  <a href="https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/"><img src="https://img.shields.io/badge/LinkedIn-fabio--slika--stella-1C2430?style=for-the-badge&logo=linkedin&logoColor=F2B54A&labelColor=263241" alt="LinkedIn"></a>
+  <a href="https://www.linkedin.com/in/fabio-stella/"><img src="https://img.shields.io/badge/LinkedIn-fabio--stella-1C2430?style=for-the-badge&logo=linkedin&logoColor=F2B54A&labelColor=263241" alt="LinkedIn"></a>
   <a href="https://gedankenn.github.io/Gedankenn/"><img src="https://img.shields.io/badge/site-gedankenn.github.io-1C2430?style=for-the-badge&logo=githubpages&logoColor=F2B54A&labelColor=263241" alt="Portfolio site"></a>
   <a href="https://x.com/Th00rBeardedOne"><img src="https://img.shields.io/badge/X-%40Th00rBeardedOne-1C2430?style=for-the-badge&logo=x&logoColor=F2B54A&labelColor=263241" alt="X: @Th00rBeardedOne"></a>
 </p>
