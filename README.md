@@ -1,38 +1,37 @@
-<div align="center">
-  <img src="assets/banner.svg" alt="GEDANKENN — R&D Firmware Engineer" width="960">
-</div>
-
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=18&duration=2400&pause=600&color=00F0FF&center=true&vCenter=true&width=640&height=46&lines=GUIs+are+just+front-ends+to+the+shell;Through+the+shell%2C+I+gain+sudo.;Through+sudo%2C+I+gain+power.;Through+power%2C+I+gain+root.;uid%3D0+shall+set+me+free..." alt="Typing SVG">
+  <img src="assets/banner.svg" alt="Fabio Slika Stella: Senior Embedded Linux &amp; Firmware Engineer" width="100%">
 </p>
 
 <p align="center">
-  <a href="mailto:fabioslikastella@gmail.com"><img src="https://img.shields.io/badge/email-00f0ff?style=flat-square&labelColor=05060f&logo=gmail&logoColor=05060f" alt="Email"></a>
-  <a href="https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/"><img src="https://img.shields.io/badge/linkedin-8b5cf6?style=flat-square&labelColor=05060f&logo=linkedin&logoColor=05060f" alt="LinkedIn"></a>
-  <a href="https://x.com/Th00rBeardedOne"><img src="https://img.shields.io/badge/x.com-2dd4bf?style=flat-square&labelColor=05060f&logo=x&logoColor=05060f" alt="X"></a>
-  <a href="https://github.com/Gedankenn"><img src="https://img.shields.io/badge/github-ff2daa?style=flat-square&labelColor=05060f&logo=github&logoColor=05060f" alt="GitHub"></a>
+  <a href="https://gedankenn.github.io/Gedankenn/"><img src="https://img.shields.io/badge/portfolio-gedankenn.github.io-F2B54A?style=flat-square&labelColor=0F1419" alt="Portfolio"></a>
+  <a href="https://github.com/Gedankenn/Curriculo/blob/main/Curriculo_Fabio_Stella_EN.pdf"><img src="https://img.shields.io/badge/CV-English-1C2430?style=flat-square&labelColor=0F1419" alt="CV (English)"></a>
+  <a href="https://github.com/Gedankenn/Curriculo/blob/main/Curriculo_Fabio_Stella_PT.pdf"><img src="https://img.shields.io/badge/CV-Portugu%C3%AAs-1C2430?style=flat-square&labelColor=0F1419" alt="CV (Português)"></a>
+  <a href="https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/"><img src="https://img.shields.io/badge/LinkedIn-1C2430?style=flat-square&logo=linkedin&logoColor=F2B54A" alt="LinkedIn"></a>
+  <a href="mailto:fabioslikastella@gmail.com"><img src="https://img.shields.io/badge/email-1C2430?style=flat-square&logo=gmail&logoColor=F2B54A" alt="Email"></a>
+  <a href="https://x.com/Th00rBeardedOne"><img src="https://img.shields.io/badge/X-1C2430?style=flat-square&logo=x&logoColor=F2B54A" alt="X"></a>
 </p>
 
----
+## whoami
 
-## ⚡ whoami
-
-Computer Engineer working on **R&D embedded systems** at **ControlID** — firmware for access control, focused on sensing, security and real-time control.
+Computer Engineer working on **R&D embedded systems** at **Control iD** (Systems Developer II): production Embedded Linux images with **Yocto/BitBake**, **Device Tree** and **Linux kernel drivers**, plus bare-metal **C/C++** on ARM Cortex-M (MSP, STM32, ESP32) for access-control devices, focused on sensing, security and real-time control.
 
 I build low-level software where **physics, electrons and code collide**: system bring-up, drivers, bootloaders, control loops. At home with oscilloscopes, logic analyzers, datasheets and a Linux terminal.
 
-```bash
+```console
 $ whoami
-fabio — R&D firmware engineer
-$ echo "$education"
-bsc. computer engineering — UTFPR, pato branco/PR
-$ echo "stack"
+fabio — embedded linux & firmware engineer
+$ cat ~/.education
+B.S. Computer Engineering — UTFPR, Pato Branco/PR
+$ cat ~/.previously
+Progress Rail (Caterpillar) · Zeentech/Stellantis · InoBram · IAV do Brasil · Xpert Automação
+$ echo $STACK
 close_to_the_metal()
 ```
 
-## 🎯 R&D Focus
+## R&D focus
 
-```
+```text
+▸ embedded linux: yocto/bitbake, device tree, kernel drivers, BSP
 ▸ firmware architecture & system bring-up
 ▸ bare-metal & RTOS development
 ▸ drivers, HALs, BSPs, bootloaders & OTA
@@ -43,72 +42,38 @@ close_to_the_metal()
 ▸ linux-based development & automation
 ```
 
-## 🛠 Toolchain
+## Toolchain
 
 **Languages**
+![C](https://img.shields.io/badge/C-1C2430?style=flat-square&logo=c&logoColor=F2B54A) ![C++](https://img.shields.io/badge/C%2B%2B-1C2430?style=flat-square&logo=cplusplus&logoColor=F2B54A) ![Python](https://img.shields.io/badge/Python-1C2430?style=flat-square&logo=python&logoColor=F2B54A) ![Bash](https://img.shields.io/badge/Bash-1C2430?style=flat-square&logo=gnubash&logoColor=F2B54A) ![Assembly](https://img.shields.io/badge/Assembly-1C2430?style=flat-square) ![Lua](https://img.shields.io/badge/Lua-1C2430?style=flat-square&logo=lua&logoColor=F2B54A) ![JavaScript](https://img.shields.io/badge/JavaScript-1C2430?style=flat-square&logo=javascript&logoColor=F2B54A) ![TypeScript](https://img.shields.io/badge/TypeScript-1C2430?style=flat-square&logo=typescript&logoColor=F2B54A) ![Rust](https://img.shields.io/badge/Rust-1C2430?style=flat-square&logo=rust&logoColor=F2B54A) ![QML](https://img.shields.io/badge/QML-1C2430?style=flat-square)
 
-![C](https://img.shields.io/badge/C-00f0ff?style=flat-square&logo=c&logoColor=05060f)
-![C++](https://img.shields.io/badge/C%2B%2B-ff2daa?style=flat-square&logo=cplusplus&logoColor=05060f)
-![Python](https://img.shields.io/badge/Python-fbbf24?style=flat-square&logo=python&logoColor=05060f)
-![Bash](https://img.shields.io/badge/Bash-8b5cf6?style=flat-square&logo=gnubash&logoColor=05060f)
-![Assembly](https://img.shields.io/badge/Assembly-f97316?style=flat-square)
-![Lua](https://img.shields.io/badge/Lua-34d399?style=flat-square&logo=lua&logoColor=05060f)
-![JavaScript](https://img.shields.io/badge/JavaScript-fbbf24?style=flat-square&logo=javascript&logoColor=05060f)
-![TypeScript](https://img.shields.io/badge/TypeScript-38bdf8?style=flat-square&logo=typescript&logoColor=05060f)
-![Rust](https://img.shields.io/badge/Rust-f97316?style=flat-square&logo=rust&logoColor=05060f)
-![QML](https://img.shields.io/badge/QML-34d399?style=flat-square)
+**Embedded Linux**
+![Yocto](https://img.shields.io/badge/Yocto-1C2430?style=flat-square) ![BitBake](https://img.shields.io/badge/BitBake-1C2430?style=flat-square) ![Device Tree](https://img.shields.io/badge/Device%20Tree-1C2430?style=flat-square) ![Linux kernel](https://img.shields.io/badge/Linux%20kernel-1C2430?style=flat-square&logo=linux&logoColor=F2B54A) ![Kernel drivers](https://img.shields.io/badge/Kernel%20drivers-1C2430?style=flat-square) ![OpenWrt](https://img.shields.io/badge/OpenWrt-1C2430?style=flat-square&logo=openwrt&logoColor=F2B54A) ![CMake](https://img.shields.io/badge/CMake-1C2430?style=flat-square&logo=cmake&logoColor=F2B54A)
 
 **MCUs**
-
-![ESP32](https://img.shields.io/badge/ESP32-38bdf8?style=flat-square&logo=espressif&logoColor=05060f)
-![STM32](https://img.shields.io/badge/STM32-2dd4bf?style=flat-square)
-![AVR](https://img.shields.io/badge/AVR-fbbf24?style=flat-square)
-![Raspberry Pi](https://img.shields.io/badge/Raspberry_Pi-a78bfa?style=flat-square&logo=raspberrypi&logoColor=05060f)
+![ESP32](https://img.shields.io/badge/ESP32-1C2430?style=flat-square&logo=espressif&logoColor=F2B54A) ![STM32](https://img.shields.io/badge/STM32-1C2430?style=flat-square) ![MSP](https://img.shields.io/badge/MSP-1C2430?style=flat-square) ![AVR](https://img.shields.io/badge/AVR-1C2430?style=flat-square) ![Raspberry Pi](https://img.shields.io/badge/Raspberry_Pi-1C2430?style=flat-square&logo=raspberrypi&logoColor=F2B54A)
 
 **Interfaces**
-
-![SPI](https://img.shields.io/badge/SPI-00f0ff?style=flat-square)
-![I²C](https://img.shields.io/badge/I%C2%B2C-ff2daa?style=flat-square)
-![UART](https://img.shields.io/badge/UART-8b5cf6?style=flat-square)
-![CAN](https://img.shields.io/badge/CAN-fbbf24?style=flat-square)
-![PWM](https://img.shields.io/badge/PWM-34d399?style=flat-square)
-![ADC](https://img.shields.io/badge/ADC-f43f5e?style=flat-square)
-![Ethernet](https://img.shields.io/badge/Ethernet-2dd4bf?style=flat-square)
-![I2S](https://img.shields.io/badge/I2S-00f0ff?style=flat-square)
+![SPI](https://img.shields.io/badge/SPI-1C2430?style=flat-square) ![I²C](https://img.shields.io/badge/I%C2%B2C-1C2430?style=flat-square) ![UART](https://img.shields.io/badge/UART-1C2430?style=flat-square) ![CAN](https://img.shields.io/badge/CAN-1C2430?style=flat-square) ![PWM](https://img.shields.io/badge/PWM-1C2430?style=flat-square) ![ADC](https://img.shields.io/badge/ADC-1C2430?style=flat-square) ![Ethernet](https://img.shields.io/badge/Ethernet-1C2430?style=flat-square) ![I2S](https://img.shields.io/badge/I2S-1C2430?style=flat-square)
 
 **Frameworks & Tooling**
+![Linux](https://img.shields.io/badge/Linux-1C2430?style=flat-square&logo=linux&logoColor=F2B54A) ![ESP-IDF](https://img.shields.io/badge/ESP--IDF-1C2430?style=flat-square&logo=espressif&logoColor=F2B54A) ![FreeRTOS](https://img.shields.io/badge/FreeRTOS-1C2430?style=flat-square) ![Django](https://img.shields.io/badge/Django-1C2430?style=flat-square&logo=django&logoColor=F2B54A) ![FastAPI](https://img.shields.io/badge/FastAPI-1C2430?style=flat-square&logo=fastapi&logoColor=F2B54A) ![Docker](https://img.shields.io/badge/Docker-1C2430?style=flat-square&logo=docker&logoColor=F2B54A) ![KiCad](https://img.shields.io/badge/KiCad-1C2430?style=flat-square) ![Tauri](https://img.shields.io/badge/Tauri-1C2430?style=flat-square&logo=tauri&logoColor=F2B54A) ![PyTorch](https://img.shields.io/badge/PyTorch-1C2430?style=flat-square&logo=pytorch&logoColor=F2B54A) ![GDB](https://img.shields.io/badge/GDB-1C2430?style=flat-square) ![OpenOCD](https://img.shields.io/badge/OpenOCD-1C2430?style=flat-square) ![Git](https://img.shields.io/badge/Git-1C2430?style=flat-square&logo=git&logoColor=F2B54A) ![Neovim](https://img.shields.io/badge/Neovim-1C2430?style=flat-square&logo=neovim&logoColor=F2B54A)
 
-![Linux](https://img.shields.io/badge/Linux-22d3ee?style=flat-square&logo=linux&logoColor=05060f)
-![ESP-IDF](https://img.shields.io/badge/ESP--IDF-38bdf8?style=flat-square&logo=espressif&logoColor=05060f)
-![FreeRTOS](https://img.shields.io/badge/FreeRTOS-2dd4bf?style=flat-square)
-![Django](https://img.shields.io/badge/Django-0ea5e9?style=flat-square&logo=django&logoColor=05060f)
-![FastAPI](https://img.shields.io/badge/FastAPI-34d399?style=flat-square&logo=fastapi&logoColor=05060f)
-![Docker](https://img.shields.io/badge/Docker-0ea5e9?style=flat-square&logo=docker&logoColor=05060f)
-![KiCad](https://img.shields.io/badge/KiCad-34d399?style=flat-square)
-![Tauri](https://img.shields.io/badge/Tauri-2dd4bf?style=flat-square&logo=tauri&logoColor=05060f)
-![PyTorch](https://img.shields.io/badge/PyTorch-f43f5e?style=flat-square&logo=pytorch&logoColor=05060f)
-![GDB](https://img.shields.io/badge/GDB-a78bfa?style=flat-square)
-![OpenOCD](https://img.shields.io/badge/OpenOCD-f472b6?style=flat-square)
-![Git](https://img.shields.io/badge/Git-f43f5e?style=flat-square&logo=git&logoColor=05060f)
-![Neovim](https://img.shields.io/badge/Neovim-34d399?style=flat-square&logo=neovim&logoColor=05060f)
+## Featured
 
-## 📊 System Stats
+| Project | What it is | Status |
+|---|---|---|
+| [**power_profiller**](https://github.com/Gedankenn/power_profiller) | ESP32 + INA226 energy profiler: ~36 Hz serial CSV, live Wi-Fi dashboard, burst & battery-life analysis | working |
+| [**ESP32-FOC**](https://github.com/Gedankenn/ESP32-FOC) | ESP32 firmware toward FOC of BLDC motors; open-loop V/F today | WIP |
+| [**3-phase-inverter**](https://github.com/Gedankenn/3-phase-inverter) | 3× IR2110 + 6× IRF540N inverter for BLDC motors | study |
+| [**OTPC**](https://github.com/Gedankenn/OTPC) | Open Traction PMSM Controller, simulation-first | phase 0 |
+| [**Kalman BLDC sim**](https://github.com/Gedankenn/Python-Simulation-of-BLDC-motor-using-Kalman-Filter) | UTFPR thesis: BLDC + FOC + Extended Kalman Filter | complete |
 
-<p align="center">
-  <img src="github-metrics.svg" alt="GitHub Metrics — cyberpunk terminal" width="72%">
-</p>
-
-<p align="center">
-  <img src="https://streak-stats.demolab.com/?user=Gedankenn&background=0a0d1f&hide_border=true&ring=00f0ff&fire=ff2daa&currStreakNum=00f0ff&currStreakLabel=ff2daa&sideNums=c9c9e0&sideLabels=8a8aa8&dates=5c5c7a" alt="GitHub Streak" width="72%">
-</p>
-
----
-
-## 🚀 Projects
+## Projects
 
 > `★` public on GitHub · `◎` local / early stage
 
-### ⚙️ Embedded & Firmware
+### Embedded & Firmware
 
 | | Project | Description |
 |---|---|---|
@@ -121,14 +86,14 @@ close_to_the_metal()
 | ★ | [**3-phase-inverter**](https://github.com/Gedankenn/3-phase-inverter) | 3-phase inverter module study · WIP |
 | ◎ | bt-headphone | Custom Bluetooth headphones — ESP32 + PCM5102A + TPA6132A2 spec & design |
 
-### 🔌 Hardware & PCB Design
+### Hardware & PCB Design
 
 | | Project | Description |
 |---|---|---|
 | ★ | [**esp32_mini**](https://github.com/Gedankenn/esp32_mini) | Minimal ESP32-C3 dev board — KiCad PCB design |
 | ◎ | kicad | Dracula theme for KiCad |
 
-### 🤖 AI & Machine Learning
+### AI & Machine Learning
 
 | | Project | Description |
 |---|---|---|
@@ -136,14 +101,14 @@ close_to_the_metal()
 | ◎ | MetaMe | Personal digital twin — clones communication style via Ollama LLM |
 | ◎ | mono | Configurable AI assistant framework — personas, CLI & web UI |
 
-### 🌐 Web Applications
+### Web Applications
 
 | | Project | Description |
 |---|---|---|
 | ★ | [**pato**](https://github.com/Gedankenn/pato) | PatoAgenda AI — WhatsApp chatbot for appointment scheduling |
 | ◎ | MyFinances | Personal finance app — Django + HTMX + AI advisor + bank sync |
 
-### 🔧 Tools & Utilities
+### Tools & Utilities
 
 | | Project | Description |
 |---|---|---|
@@ -153,7 +118,7 @@ close_to_the_metal()
 | ◎ | sigrok-ht6p20b-decoder | Sigrok/PulseView decoder for HT6P20B OOK encoder IC |
 | ◎ | raspi4 | Arch Linux ARM flash utility for Raspberry Pi 4 |
 
-### 🐧 Linux & Desktop
+### Linux & Desktop
 
 | | Project | Description |
 |---|---|---|
@@ -165,7 +130,7 @@ close_to_the_metal()
 | ★ | [**site-genner**](https://github.com/Gedankenn/site-genner) | Static site generator — TypeScript |
 
 
-### 📈 Data & Simulation
+### Data & Simulation
 
 | | Project | Description |
 |---|---|---|
@@ -174,11 +139,19 @@ close_to_the_metal()
 | ★ | [**stocks**](https://github.com/Gedankenn/stocks) | Terminal stock portfolio |
 | ◎ | inmet_data | Brazil INMET weather data — parsing & visualization (2000–2026) |
 
----
+## System stats
 
-## 🧬 Philosophy
+<p align="center">
+  <img src="github-metrics.svg" alt="GitHub metrics" width="72%">
+</p>
 
-```
+<p align="center">
+  <img src="https://streak-stats.demolab.com/?user=Gedankenn&background=0F1419&border=263241&ring=F2B54A&fire=F2B54A&currStreakNum=E6EDF3&currStreakLabel=F2B54A&sideNums=E6EDF3&sideLabels=A9B4BF&dates=7D8A97" alt="GitHub streak" width="72%">
+</p>
+
+## Philosophy
+
+```text
 ▸ understand the system before optimizing it
 ▸ measure before guessing
 ▸ read the datasheet
@@ -187,15 +160,18 @@ close_to_the_metal()
 ▸ keep firmware boring and reliable
 ```
 
-## 📬 Connect
+## Connect
 
-- 📧 **Email:** fabioslikastella@gmail.com
-- 💼 **LinkedIn:** [fabio-slika-stella](https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/)
-- 🐦 **X/Twitter:** [@Th00rBeardedOne](https://x.com/Th00rBeardedOne)
-- 🖥️ **GitHub:** [Gedankenn](https://github.com/Gedankenn)
+| | |
+|---|---|
+| Email | [fabioslikastella@gmail.com](mailto:fabioslikastella@gmail.com) |
+| LinkedIn | [fabio-slika-stella](https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/) |
+| Portfolio | [gedankenn.github.io/Gedankenn](https://gedankenn.github.io/Gedankenn/) |
+| CV | [English](https://github.com/Gedankenn/Curriculo/blob/main/Curriculo_Fabio_Stella_EN.pdf) · [Português](https://github.com/Gedankenn/Curriculo/blob/main/Curriculo_Fabio_Stella_PT.pdf) |
+| X | [@Th00rBeardedOne](https://x.com/Th00rBeardedOne) |
 
 ---
 
 <p align="center">
-  <sub><b>© 2026 Fabio S. Stella</b> — R&D Firmware Engineer · Close to the metal ⚙️ fueled by coffee ☕</sub>
+  <sub><b>© 2026 Fabio Slika Stella</b> · Embedded Linux &amp; Firmware · close to the metal, fueled by coffee</sub>
 </p>

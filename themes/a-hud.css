@@ -1,0 +1,17 @@
+/* Option A · Refined cyberpunk / HUD: graphite + phosphor amber (default)
+   Same tokens as the LinkedIn kit (design-linkedin/brand.css). HUD corner brackets,
+   static scanlines on the hero only, glow limited to the accent. */
+:root {
+  color-scheme: dark;
+  --bg: #0F1419;  --section-alt: #11171D;  --surface: #151B22;  --surface-2: #1C2430;  --chip-bg: #1C2430;
+  --media-bg: #0C1015;  --line: #263241;
+  --text: #E6EDF3;  --text-2: #A9B4BF;  --muted: #7D8A97;
+  --accent: #F2B54A;  --accent-text: #F2B54A;  --accent-dim: rgba(242,181,74,.12);  --accent-line: rgba(242,181,74,.45);  --on-accent: #0F1419;
+  --accent-2: #F2B54A;
+  --glow: 0 0 18px rgba(242,181,74,.35);
+  --link: #E6EDF3;  --ok: #5FB98A;
+  --bar-bg: rgba(15,20,25,.82);
+  --hero-bg: radial-gradient(1200px 500px at 85% 10%, rgba(242,181,74,.06), transparent 60%), #0F1419;
+  --hero-grid: linear-gradient(rgba(139,152,165,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(139,152,165,.07) 1px, transparent 1px);
+  --shadow: 0 20px 50px -20px rgba(0,0,0,.6);
+}

@@ -1,1198 +1,357 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fabio S. Stella | R&D Firmware Engineer</title>
-  <meta name="description" content="GEDANKENN — R&D Firmware Engineer. Embedded systems, low-level software, Linux. Close to the metal." />
-  <meta name="theme-color" content="#05060f" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305060f'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='18' fill='%2300f0ff' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #05060f;
-      --bg2: #0a0d1f;
-      --cyan: #00f0ff;
-      --magenta: #ff2daa;
-      --violet: #8b5cf6;
-      --amber: #ffb300;
-      --text: #d8d8ec;
-      --muted: #8a8aa8;
-      --line: #1b1b3a;
-      --glass: rgba(13, 15, 34, 0.62);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Fira Code', monospace;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    ::selection { background: var(--magenta); color: #05060f; }
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: #1e1e45; border-radius: 5px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
-
-    /* ---- backdrop ---- */
-    #bg-grid {
-      position: fixed; inset: 0; z-index: -3;
-      background:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 240, 255, 0.08), transparent 60%),
-        radial-gradient(ellipse 60% 40% at 90% 110%, rgba(255, 45, 170, 0.07), transparent 60%),
-        radial-gradient(ellipse 60% 40% at 5% 100%, rgba(139, 92, 246, 0.06), transparent 60%);
-      background-color: var(--bg);
-    }
-    #bg-grid::before {
-      content: ""; position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 85%);
-    }
-    #canvas { position: fixed; inset: 0; z-index: -2; opacity: 0.5; }
-    #scanlines {
-      position: fixed; inset: 0; z-index: 999; pointer-events: none; opacity: 0.5;
-      background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px);
-      mix-blend-mode: overlay;
-    }
-
-    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
-
-    /* ---- boot overlay ---- */
-    #boot {
-      position: fixed; inset: 0; z-index: 1000;
-      background: #03040a;
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.8s ease, visibility 0.8s;
-    }
-    #boot.done { opacity: 0; visibility: hidden; }
-    #boot pre {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 14px; line-height: 1.8; color: var(--cyan);
-      text-shadow: 0 0 8px rgba(0, 240, 255, 0.55);
-      white-space: pre-wrap; max-width: 680px; padding: 24px;
-      border: 1px solid var(--line); border-radius: 10px;
-      background: rgba(10, 13, 31, 0.9);
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.08), inset 0 0 30px rgba(0, 240, 255, 0.04);
-    }
-    #boot .cursor { animation: blink 1s step-end infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
-
-    /* ---- nav ---- */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-      background: rgba(5, 6, 15, 0.75); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; }
-    .brand { font-family: 'Orbitron', sans-serif; font-weight: 700; letter-spacing: 3px; color: var(--cyan); text-decoration: none; text-shadow: 0 0 12px rgba(0,240,255,0.4); }
-    .brand .dot { color: var(--magenta); }
-    nav ul { display: flex; gap: 26px; list-style: none; }
-    nav a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 1px; transition: color 0.25s; }
-    nav a:hover { color: var(--cyan); }
-
-    /* ---- hero ---- */
-    header.hero {
-      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-      position: relative; padding-top: 58px;
-    }
-    .hero-status {
-      font-size: 12px; letter-spacing: 2px; color: var(--muted);
-      margin-bottom: 14px; font-family: 'Share Tech Mono', monospace;
-    }
-    .hero-status .ok { color: #34d399; }
-    .glitch {
-      font-family: 'Orbitron', sans-serif; font-weight: 900;
-      font-size: clamp(3rem, 9vw, 6.4rem); letter-spacing: 8px; color: var(--cyan);
-      position: relative; text-shadow: 0 0 24px rgba(0,240,255,0.35);
-      animation: flicker 6s infinite;
-    }
-    .glitch::before, .glitch::after {
-      content: attr(data-text); position: absolute; inset: 0; overflow: hidden;
-    }
-    .glitch::before {
-      color: var(--magenta); transform: translate(-3px, -2px);
-      clip-path: inset(0 0 55% 0); opacity: 0.8; animation: glitchA 3.2s infinite linear alternate-reverse;
-    }
-    .glitch::after {
-      color: var(--violet); transform: translate(3px, 2px);
-      clip-path: inset(55% 0 0 0); opacity: 0.8; animation: glitchB 2.7s infinite linear alternate-reverse;
-    }
-    @keyframes glitchA { 0% { clip-path: inset(0 0 55% 0); } 20% { clip-path: inset(20% 0 65% 0); } 40% { clip-path: inset(60% 0 10% 0); } 100% { clip-path: inset(80% 0 5% 0); } }
-    @keyframes glitchB { 0% { clip-path: inset(55% 0 0 0); } 25% { clip-path: inset(80% 0 10% 0); } 50% { clip-path: inset(15% 0 75% 0); } 100% { clip-path: inset(5% 0 90% 0); } }
-    @keyframes flicker { 0%, 91%, 95%, 100% { opacity: 1; } 92% { opacity: 0.6; } 93% { opacity: 1; } }
-    .hero-role {
-      font-size: clamp(1rem, 2.4vw, 1.4rem); color: var(--magenta);
-      font-family: 'Share Tech Mono', monospace; margin-top: 16px; height: 1.8em;
-      letter-spacing: 2px; text-shadow: 0 0 14px rgba(255,45,170,0.4);
-    }
-    .hero-role .cursor { display: inline-block; width: 0.6em; background: var(--cyan); animation: blink 1s step-end infinite; color: transparent; }
-    .hero-tag { margin-top: 22px; color: var(--muted); font-size: 15px; max-width: 560px; }
-    .hero-tag b { color: var(--cyan); font-weight: 500; }
-    .hero-cta { margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap; }
-    .btn {
-      display: inline-block; padding: 12px 22px; font-size: 13px; letter-spacing: 1.5px;
-      font-family: 'Fira Code', monospace; color: var(--bg); text-decoration: none;
-      background: var(--cyan); border: 1px solid var(--cyan); font-weight: 600;
-      transition: all 0.25s; box-shadow: 0 0 18px rgba(0,240,255,0.25);
-    }
-    .btn:hover { background: transparent; color: var(--cyan); box-shadow: 0 0 26px rgba(0,240,255,0.5); transform: translateY(-2px); }
-    .btn.ghost { background: transparent; color: var(--magenta); border-color: var(--magenta); box-shadow: 0 0 18px rgba(255,45,170,0.2); }
-    .btn.ghost:hover { background: var(--magenta); color: #05060f; box-shadow: 0 0 26px rgba(255,45,170,0.5); }
-
-    .hero-bar {
-      margin-top: 64px; border: 1px solid var(--line); background: var(--glass);
-      backdrop-filter: blur(8px); border-radius: 8px; overflow: hidden;
-      font-family: 'Share Tech Mono', monospace; font-size: 13px;
-    }
-    .hero-bar .bar-title { padding: 8px 16px; border-bottom: 1px solid var(--line); color: var(--muted); background: rgba(0,240,255,0.03); }
-    .hero-bar .bar-title .pulse { color: #34d399; animation: blink 1.6s step-end infinite; }
-    .hero-bar .row { display: flex; flex-wrap: wrap; gap: 4px 28px; padding: 12px 16px; color: var(--muted); }
-    .hero-bar .row b { color: var(--cyan); font-weight: 400; }
-    .hero-bar .row .m { color: var(--magenta); }
-    .hero-scroll { margin: 48px auto 0; text-align: center; color: var(--muted); font-size: 12px; letter-spacing: 3px; animation: blink 2s step-end infinite; }
-
-    /* ---- sections ---- */
-    section { padding: 96px 0 40px; }
-    .sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 40px; }
-    .sec-head .idx { color: var(--magenta); font-family: 'Share Tech Mono', monospace; font-size: 14px; }
-    .sec-head h2 { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 3px; color: var(--text); }
-    .sec-head h2 span { color: var(--cyan); }
-    .sec-head::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--line), transparent); }
-
-    .card {
-      background: var(--glass); border: 1px solid var(--line); border-radius: 10px;
-      padding: 26px; backdrop-filter: blur(8px);
-      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-      position: relative; overflow: hidden;
-    }
-    .card::before {
-      content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
-      background: linear-gradient(var(--cyan), var(--magenta)); opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .card:hover { transform: translateY(-4px); border-color: rgba(0,240,255,0.5); box-shadow: 0 8px 30px rgba(0,240,255,0.12); }
-    .card:hover::before { opacity: 1; }
-
-    /* about */
-    .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 22px; }
-    .terminal { font-family: 'Share Tech Mono', monospace; font-size: 14px; }
-    .terminal .t-cmd { color: var(--cyan); }
-    .terminal .t-out { color: var(--text); }
-    .terminal .t-dim { color: var(--muted); }
-    .terminal .t-mag { color: var(--magenta); }
-    .terminal .line { margin-bottom: 10px; }
-    .terminal .cursor { background: var(--cyan); display: inline-block; width: 8px; height: 15px; vertical-align: middle; animation: blink 1s step-end infinite; }
-
-    /* focus */
-    .focus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
-    .focus-grid .item { font-size: 13.5px; color: var(--text); }
-    .focus-grid .item .tag { color: var(--cyan); font-family: 'Share Tech Mono', monospace; margin-right: 8px; }
-    .focus-grid .item:hover .tag { color: var(--magenta); }
-
-    /* metrics */
-    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px; }
-    .metric { text-align: center; padding: 28px 16px; }
-    .metric .num {
-      font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 2.3rem;
-      color: var(--cyan); text-shadow: 0 0 20px rgba(0,240,255,0.35);
-    }
-    .metric .num .suffix { color: var(--magenta); }
-    .metric .lbl { margin-top: 8px; font-size: 12px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; }
-
-    /* stack */
-    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
-    .stack-group h4 { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; letter-spacing: 2px; color: var(--violet); margin-bottom: 16px; }
-    .chips { display: flex; flex-wrap: wrap; gap: 9px; }
-    .chip {
-      font-family: 'Share Tech Mono', monospace; font-size: 12.5px; letter-spacing: 1px;
-      padding: 6px 13px; border: 1px solid var(--line); border-radius: 4px; color: var(--text);
-      transition: all 0.25s; background: rgba(10,13,31,0.5);
-    }
-    .chip:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 14px rgba(0,240,255,0.25); transform: translateY(-2px); }
-    .chip.c { border-color: rgba(0,240,255,0.4); color: var(--cyan); }
-    .chip.m { border-color: rgba(255,45,170,0.4); color: #ff7cc9; }
-    .chip.v { border-color: rgba(139,92,246,0.4); color: #b79cff; }
-    .chip.a { border-color: rgba(255,179,0,0.4); color: #ffd166; }
-    .chip.t { border-color: rgba(45,212,191,0.4); color: #5eead4; }
-
-    /* projects */
-    .proj-cat { margin-bottom: 36px; }
-    .proj-cat-head {
-      font-family: 'Orbitron', sans-serif; font-size: 0.9rem; letter-spacing: 2px;
-      color: var(--violet); margin-bottom: 16px; padding-bottom: 8px;
-      border-bottom: 1px dashed rgba(139,92,246,0.3);
-    }
-    .proj-cat-head .cat-ico { margin-right: 8px; }
-    .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
-    .proj { display: flex; flex-direction: column; }
-    .proj .p-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .proj .p-top .ico { color: var(--magenta); font-size: 20px; }
-    .proj .p-top .stars { color: var(--amber); font-size: 12.5px; font-family: 'Share Tech Mono', monospace; }
-    .proj h3 { font-size: 1.05rem; color: var(--cyan); margin-bottom: 8px; font-weight: 600; }
-    .proj p { font-size: 13.5px; color: var(--muted); flex: 1; }
-    .proj .tags { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
-    .proj .tags span { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--violet); border: 1px solid rgba(139,92,246,0.35); padding: 3px 8px; border-radius: 3px; }
-    .proj.local { opacity: 0.7; }
-    .proj.local:hover { opacity: 1; }
-    .proj .p-top .local-badge {
-      color: var(--muted); font-size: 11px; font-family: 'Share Tech Mono', monospace;
-      border: 1px solid var(--line); padding: 2px 7px; border-radius: 3px; letter-spacing: 1px;
-    }
-    .proj a { color: inherit; text-decoration: none; }
-    .proj a:hover { color: var(--cyan); }
-    .more { margin-top: 26px; text-align: center; font-size: 13px; color: var(--muted); }
-    .more a { color: var(--cyan); text-decoration: none; border-bottom: 1px dashed rgba(0,240,255,0.4); }
-    .more a:hover { color: var(--magenta); }
-
-    /* philosophy */
-    .philo { font-family: 'Share Tech Mono', monospace; font-size: 14.5px; }
-    .philo .row { padding: 11px 0; border-bottom: 1px dashed var(--line); color: var(--text); display: flex; gap: 14px; }
-    .philo .row:last-child { border-bottom: none; }
-    .philo .row .op { color: var(--muted); }
-    .philo .row .tx { color: var(--cyan); }
-    .philo .row .cm { color: var(--muted); font-style: italic; }
-
-    /* contact */
-    .contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .contact a { color: var(--text); text-decoration: none; display: block; }
-    .contact .c-ico { font-size: 20px; margin-bottom: 10px; color: var(--cyan); }
-    .contact a:hover { color: var(--cyan); }
-    .contact a:hover .c-ico { color: var(--magenta); }
-
-    footer {
-      margin-top: 90px; padding: 34px 0; border-top: 1px solid var(--line);
-      text-align: center; font-size: 12.5px; color: var(--muted);
-      font-family: 'Share Tech Mono', monospace;
-    }
-    footer .clock { color: var(--cyan); margin-top: 8px; letter-spacing: 2px; }
-    footer .foot-heart { color: var(--magenta); }
-
-    /* reveal */
-    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.on { opacity: 1; transform: none; }
-
-    @media (max-width: 760px) {
-      nav ul { display: none; }
-      .about-grid { grid-template-columns: 1fr; }
-      .glitch { letter-spacing: 4px; }
-      .timeline { padding-left: 20px; }
-      .timeline::before { left: 6px; }
-      .tl-item { padding-left: 28px !important; }
-      .tl-dot { left: 0 !important; }
-      .skill-row { flex-direction: column; gap: 6px; }
-      .skill-bar { width: 100% !important; }
-      .sc-banner { flex-direction: column; text-align: center; }
-      #stack > div:last-child > div { grid-template-columns: 1fr !important; }
-    }
-
-    /* ---- timeline ---- */
-    .timeline { position: relative; padding-left: 32px; }
-    .timeline::before {
-      content: ""; position: absolute; left: 12px; top: 0; bottom: 0;
-      width: 2px; background: linear-gradient(to bottom, var(--cyan), var(--magenta), var(--violet));
-      border-radius: 2px;
-    }
-    .tl-item {
-      position: relative; padding: 0 0 32px 24px;
-    }
-    .tl-item:last-child { padding-bottom: 0; }
-    .tl-dot {
-      position: absolute; left: -6px; top: 6px;
-      width: 14px; height: 14px; border-radius: 50%;
-      border: 2px solid var(--cyan); background: var(--bg);
-      z-index: 1; transition: all 0.3s;
-    }
-    .tl-item:hover .tl-dot { background: var(--cyan); box-shadow: 0 0 12px rgba(0,240,255,0.5); }
-    .tl-item.highlight .tl-dot { border-color: var(--magenta); background: var(--magenta); box-shadow: 0 0 12px rgba(255,45,170,0.5); }
-    .tl-date {
-      font-family: 'Share Tech Mono', monospace; font-size: 12px;
-      color: var(--cyan); letter-spacing: 1px; margin-bottom: 4px;
-    }
-    .tl-title {
-      font-size: 1rem; color: var(--text); font-weight: 600; margin-bottom: 2px;
-    }
-    .tl-company {
-      font-family: 'Share Tech Mono', monospace; font-size: 13px;
-      color: var(--magenta); margin-bottom: 6px;
-    }
-    .tl-desc { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
-    .tl-tag {
-      display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 10.5px;
-      color: var(--violet); border: 1px solid rgba(139,92,246,0.35);
-      padding: 2px 7px; border-radius: 3px; margin-top: 8px; margin-right: 4px;
-    }
-
-    /* ---- skill bars ---- */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
-    .skill-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-    .skill-row:last-child { margin-bottom: 0; }
-    .skill-name {
-      font-family: 'Share Tech Mono', monospace; font-size: 13px;
-      color: var(--text); min-width: 120px; letter-spacing: 0.5px;
-    }
-    .skill-bar {
-      flex: 1; height: 8px; background: rgba(27,27,58,0.8);
-      border-radius: 4px; overflow: hidden; position: relative;
-    }
-    .skill-fill {
-      height: 100%; border-radius: 4px; transition: width 1.2s ease;
-      position: relative; width: 0;
-    }
-    .skill-fill::after {
-      content: ""; position: absolute; right: 0; top: -2px;
-      width: 4px; height: 12px; border-radius: 2px;
-      background: inherit; filter: brightness(1.4);
-    }
-    .skill-fill.cyan { background: linear-gradient(90deg, rgba(0,240,255,0.3), var(--cyan)); }
-    .skill-fill.magenta { background: linear-gradient(90deg, rgba(255,45,170,0.3), var(--magenta)); }
-    .skill-fill.violet { background: linear-gradient(90deg, rgba(139,92,246,0.3), var(--violet)); }
-    .skill-fill.amber { background: linear-gradient(90deg, rgba(255,179,0,0.3), var(--amber)); }
-    .skill-fill.teal { background: linear-gradient(90deg, rgba(45,212,191,0.3), #2dd4bf); }
-    .skill-pct {
-      font-family: 'Share Tech Mono', monospace; font-size: 12px;
-      color: var(--muted); min-width: 36px; text-align: right;
-    }
-
-    /* ---- languages & certs ---- */
-    .lang-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-    .lang-card { text-align: center; padding: 24px 16px; }
-    .lang-card .lang-name { font-size: 1rem; color: var(--text); margin-bottom: 6px; font-weight: 600; }
-    .lang-card .lang-level {
-      font-family: 'Share Tech Mono', monospace; font-size: 12px;
-      color: var(--cyan); letter-spacing: 1px;
-    }
-    .lang-card .lang-bar {
-      margin: 12px auto 0; width: 80%; height: 4px;
-      background: rgba(27,27,58,0.8); border-radius: 2px; overflow: hidden;
-    }
-    .lang-card .lang-bar-fill { height: 100%; border-radius: 2px; }
-
-    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-    .cert-item {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 16px; font-size: 13.5px;
-    }
-    .cert-item .cert-ico {
-      font-size: 18px; color: var(--amber); flex-shrink: 0; margin-top: 2px;
-    }
-    .cert-item .cert-name { color: var(--text); font-weight: 500; }
-    .cert-item .cert-org { color: var(--muted); font-size: 12px; margin-top: 2px; }
-
-    /* ----stellacorp.com.br site banner ---- */
-    .sc-banner {
-      display: flex; align-items: center; gap: 18px;
-      padding: 20px 26px; margin-bottom: 36px;
-      border: 1px solid rgba(255,45,170,0.3); border-radius: 10px;
-      background: linear-gradient(135deg, rgba(255,45,170,0.06), rgba(139,92,246,0.04));
-    }
-    .sc-banner .sc-ico {
-      font-size: 28px; color: var(--magenta); flex-shrink: 0;
-    }
-    .sc-banner .sc-text h3 {
-      font-family: 'Orbitron', sans-serif; font-size: 1rem; letter-spacing: 2px;
-      color: var(--magenta); margin-bottom: 4px;
-    }
-    .sc-banner .sc-text p { font-size: 13.5px; color: var(--muted); }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fabio Slika Stella · Senior Embedded Linux &amp; Firmware Engineer</title>
+  <meta name="description" content="Fabio Slika Stella: Embedded Linux (Yocto, Device Tree, kernel drivers) and bare-metal C/C++ firmware on ARM Cortex-M (STM32, ESP32, MSP). Systems Developer II at Control iD, Pato Branco, PR, Brazil.">
+  <meta name="author" content="Fabio Slika Stella">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Fabio Slika Stella · Senior Embedded Linux &amp; Firmware Engineer">
+  <meta property="og:description" content="Yocto · Device Tree · Kernel drivers · Bootloader &amp; OTA · STM32 · ESP32 · MSP · FOC/PMSM">
+  <meta property="og:url" content="https://gedankenn.github.io/Gedankenn/">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/plex-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="themes/a-hud.css" id="theme-css">
 </head>
 <body>
-  <div id="bg-grid"></div>
-  <canvas id="canvas"></canvas>
-  <div id="scanlines"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-  <!-- boot sequence -->
-  <div id="boot">
-    <pre id="bootText"></pre>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#top" aria-label="Fabio Slika Stella, back to top"><span class="brand-mark" aria-hidden="true">FSS</span><span class="brand-name">Fabio Slika Stella</span></a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
+</header>
 
-  <nav>
-    <div class="wrap">
-      <a class="brand" href="#top">GEDANKENN<span class="dot">_</span></a>
-      <ul>
-        <li><a href="#about">whoami</a></li>
-        <li><a href="#experience">experience</a></li>
-        <li><a href="#stack">stack</a></li>
-        <li><a href="#projects">projects</a></li>
-        <li><a href="#contact">contact</a></li>
+<main id="main">
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Embedded Linux · Firmware · Motor control</p>
+      <h1>Fabio Slika Stella</h1>
+      <p class="headline">Senior Embedded Linux &amp; Firmware Engineer</p>
+      <p class="lede">I ship firmware and Embedded Linux on production devices (electronic security, railway, automotive): Yocto, Device&nbsp;Tree, Linux kernel drivers and bare-metal C/C++ on ARM Cortex-M. Currently <strong>Systems Developer II at Control&nbsp;iD</strong>.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/Gedankenn/Curriculo/blob/main/Curriculo_Fabio_Stella_EN.pdf" target="_blank" rel="noopener">Download CV <span class="btn-sub">EN</span></a>
+        <a class="btn" href="https://github.com/Gedankenn" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="mailto:fabioslikastella@gmail.com">Email</a>
+      </div>
+      <p class="hero-meta">Pato Branco, PR, Brazil · Portuguese (native) · English (advanced) · <a href="https://github.com/Gedankenn/Curriculo/blob/main/Curriculo_Fabio_Stella_PT.pdf" target="_blank" rel="noopener">CV em português</a></p>
+    </div>
+
+    <aside class="hero-panel" aria-label="Summary">
+      <span class="hud-tag" aria-hidden="true">SYS <b>●</b> ONLINE · UTC−3</span>
+      <div class="panel-bar"><i></i><i></i><i></i><span>fabio@target:~</span></div>
+<pre class="panel-body"><span class="p">$</span> cat /etc/engineer
+<span class="k">role    </span>  Systems Developer II @ Control iD
+<span class="k">linux   </span>  Yocto · Device Tree · kernel drivers
+<span class="k">firmware</span>  bare-metal C/C++ · bootloader · OTA
+<span class="k">mcu     </span>  Cortex-M: STM32 · ESP32 · MSP
+<span class="k">buses   </span>  CAN · RS-485 · I²C · UART · MQTT
+<span class="k">research</span>  FOC / BLDC · Extended Kalman Filter
+<span class="p">$</span> echo $MOTTO
+<span class="o">measure before assuming.</span>
+<span class="o">keep firmware boring and reliable.</span><span class="cursor" aria-hidden="true"></span></pre>
+    </aside>
+  </div>
+  <svg class="hero-trace" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path class="wave-dim" d="M0 60 H180 L200 30 H260 L280 90 H340 L360 30 H420 L440 90 H500 L520 60 H1440"/>
+    <path class="wave" d="M0 80 C 120 80, 160 40, 240 40 S 360 80, 480 80 S 600 40, 720 40 S 840 80, 960 80 S 1080 40, 1200 40 S 1320 80, 1440 80"/>
+  </svg>
+</section>
+
+<!-- ============================== ABOUT ============================== -->
+<section class="section" id="about" aria-labelledby="about-h">
+  <div class="wrap">
+    <header class="sec-head"><span class="sec-idx">01</span><h2 id="about-h">About</h2></header>
+    <div class="about-grid">
+      <div class="prose">
+        <p>Computer Engineer (UTFPR) working end to end on embedded products: production Embedded Linux images with <strong>Yocto/BitBake</strong>, <strong>Device Tree</strong> (DTS/DTB) and <strong>Linux kernel drivers/BSP</strong>, and bare-metal <strong>Embedded C/C++</strong> on ARM Cortex-M (MSP, STM32, ESP32): bootloaders, OTA, cryptography, MQTT, Ethernet/TCP-IP, CAN, RS-485, I²C and UART.</p>
+        <p>My background spans electronic security, railway and automotive. My research roots are in motor control: Field-Oriented Control of BLDC/PMSM motors and Extended Kalman Filter state estimation, which I keep exploring in open-source firmware and inverter hardware.</p>
+        <p>I work in cross-functional teams, listen closely, and treat code review as engineering, not conflict.</p>
+      </div>
+      <div class="principles" aria-label="Engineering principles">
+        <p class="label">How I work</p>
+        <ul>
+          <li><span class="tick" aria-hidden="true">▸</span>Understand the system before optimizing it</li>
+          <li><span class="tick" aria-hidden="true">▸</span>Measure before guessing</li>
+          <li><span class="tick" aria-hidden="true">▸</span>Read the datasheet</li>
+          <li><span class="tick" aria-hidden="true">▸</span>Respect physics</li>
+          <li><span class="tick" aria-hidden="true">▸</span>Automate everything repeatable</li>
+          <li><span class="tick" aria-hidden="true">▸</span>Keep firmware boring and reliable</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== EXPERIENCE ============================== -->
+<section class="section" id="experience" aria-labelledby="exp-h">
+  <div class="wrap">
+    <header class="sec-head"><span class="sec-idx">02</span><h2 id="exp-h">Experience</h2></header>
+    <ol class="timeline">
+      <li class="tl-item current">
+        <div class="tl-when">2026 — Present</div>
+        <div class="tl-body">
+          <h3>Systems Developer II <span class="at">· Control iD</span></h3>
+          <p class="tl-where">São Paulo, Brazil · Access-control devices</p>
+          <ul>
+            <li>Owned production Embedded Linux images (Yocto/BitBake, Device Tree DTS/DTB, Linux kernel drivers) for access-control devices.</li>
+            <li>Developed bare-metal Embedded C/C++ on 3 ARM Cortex-M families (MSP, STM32, ESP32): bootloader, OTA and board bring-up.</li>
+            <li>Integrated cryptography, Ethernet, TCP/IP, MQTT and web services; led code review and GDB debug on the R&amp;D team.</li>
+          </ul>
+          <p class="chips"><span class="chip">Yocto</span><span class="chip">Device Tree</span><span class="chip">Kernel drivers</span><span class="chip">MSP · STM32 · ESP32</span><span class="chip">OTA</span></p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-when">2024</div>
+        <div class="tl-body">
+          <h3>Embedded Systems Engineer <span class="at">· Progress Rail (Caterpillar)</span></h3>
+          <p class="tl-where">Railway · Locomotive controllers</p>
+          <ul>
+            <li>Shipped locomotive-controller firmware in C/C++ with CAN, RS-485 and 4G Ethernet via cellular modem (MSP).</li>
+            <li>Designed data architecture, persistent storage and microcontroller memory map for field operation.</li>
+          </ul>
+          <p class="chips"><span class="chip">C/C++</span><span class="chip">CAN</span><span class="chip">RS-485</span><span class="chip">4G</span><span class="chip">MSP</span></p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-when">2024</div>
+        <div class="tl-body">
+          <h3>Software Engineer <span class="at">· Zeentech / Stellantis</span></h3>
+          <p class="tl-where">Automotive</p>
+          <ul>
+            <li>Built MATLAB/Simulink vehicle models and validated automotive embedded code from simulation to bench.</li>
+          </ul>
+          <p class="chips"><span class="chip">MATLAB/Simulink</span><span class="chip">Model-based validation</span></p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-when">2022 — 2024</div>
+        <div class="tl-body">
+          <h3>Embedded Systems Developer <span class="at">· InoBram</span></h3>
+          <p class="tl-where">Industrial products</p>
+          <ul>
+            <li>Wrote STM32 bare-metal firmware in C across a 2-year industrial product cycle, including bootloader, OTA and bring-up.</li>
+          </ul>
+          <p class="chips"><span class="chip">STM32</span><span class="chip">Bare-metal C</span><span class="chip">Bootloader</span><span class="chip">OTA</span></p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-when">2022</div>
+        <div class="tl-body">
+          <h3>Test Engineer <span class="at">· IAV do Brasil</span></h3>
+          <p class="tl-where">Automotive electronics</p>
+          <ul>
+            <li>Performed white-box HIL validation of automotive electronics with Typhoon HIL.</li>
+          </ul>
+          <p class="chips"><span class="chip">HIL</span><span class="chip">Typhoon HIL</span></p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-when">2021 — 2022</div>
+        <div class="tl-body">
+          <h3>R&amp;D Intern <span class="at">· Xpert Automação</span></h3>
+          <p class="tl-where">R&amp;D</p>
+          <ul>
+            <li>Implemented ESP32/STM32 bare-metal firmware; deployed OpenWrt on a commercial router adopted as the product network backbone.</li>
+          </ul>
+          <p class="chips"><span class="chip">ESP32</span><span class="chip">STM32</span><span class="chip">OpenWrt</span></p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="edu">
+      <div class="edu-card">
+        <p class="label">Education</p>
+        <h3>B.S. Computer Engineering · UTFPR</h3>
+        <p class="tl-where">Universidade Tecnológica Federal do Paraná · 2014 — 2022</p>
+        <p>FOC research 2020 — 2022. Dissertation: <em>Simulation of an Extended Kalman Filter for Brushless DC Motor</em> (advisor: Emerson G. Carati).</p>
+      </div>
+      <div class="edu-card">
+        <p class="label">Publication &amp; courses</p>
+        <h3>Study of a Brushless DC Motor with Extended Kalman Filter</h3>
+        <p class="tl-where">2021</p>
+        <p>Course: Bare-Metal STM32 (Udemy, 2023).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PROJECTS ============================== -->
+<section class="section" id="projects" aria-labelledby="proj-h">
+  <div class="wrap">
+    <header class="sec-head"><span class="sec-idx">03</span><h2 id="proj-h">Featured projects</h2></header>
+    <p class="sec-lede">Open-source work on GitHub, mostly around power measurement and motor control. Status is stated as it is in each repository.</p>
+
+    <div class="projects">
+      <article class="proj proj-wide">
+        <a class="proj-media" href="https://github.com/Gedankenn/power_profiller" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <img src="assets/projects/power-profiler-capture.webp" alt="" width="1000" height="734" loading="lazy" decoding="async">
+        </a>
+        <div class="proj-body">
+          <p class="proj-kicker"><span>Instrumentation</span><span class="status ok">Working</span></p>
+          <h3><a href="https://github.com/Gedankenn/power_profiller" target="_blank" rel="noopener">power_profiller</a></h3>
+          <p>Real-time energy profiling for battery-powered electronics. An ESP32 reads a TI INA226 over I²C at ~36 samples/s, streams CSV over serial and serves a live Chart.js dashboard over Wi-Fi with no cloud. A Python analyzer adds burst detection and CR2032 battery-life estimates.</p>
+          <p class="chips"><span class="chip">C</span><span class="chip">ESP-IDF</span><span class="chip">FreeRTOS</span><span class="chip">INA226 · I²C</span><span class="chip">Python</span></p>
+        </div>
+      </article>
+
+      <article class="proj">
+        <a class="proj-media art" href="https://github.com/Gedankenn/ESP32-FOC" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <svg viewBox="0 0 400 200" role="presentation" focusable="false">
+            <g class="art-grid"><path d="M0 100 H400 M100 0 V200 M200 0 V200 M300 0 V200"/></g>
+            <path class="art-a" d="M0 100.0 L8 82.6 L16 66.3 L24 52.1 L32 40.9 L40 33.4 L48 30.1 L56 31.2 L64 36.7 L72 46.1 L80 58.9 L88 74.2 L96 91.2 L104 108.8 L112 125.8 L120 141.1 L128 153.9 L136 163.3 L144 168.8 L152 169.9 L160 166.6 L168 159.1 L176 147.9 L184 133.7 L192 117.4 L200 100.0 L208 82.6 L216 66.3 L224 52.1 L232 40.9 L240 33.4 L248 30.1 L256 31.2 L264 36.7 L272 46.1 L280 58.9 L288 74.2 L296 91.2 L304 108.8 L312 125.8 L320 141.1 L328 153.9 L336 163.3 L344 168.8 L352 169.9 L360 166.6 L368 159.1 L376 147.9 L384 133.7 L392 117.4 L400 100.0"/>
+            <path class="art-b" d="M0 160.6 L8 167.4 L16 170.0 L24 168.2 L32 162.0 L40 152.0 L48 138.7 L56 123.0 L64 105.9 L72 88.3 L80 71.5 L88 56.5 L96 44.2 L104 35.5 L112 30.8 L120 30.4 L128 34.4 L136 42.5 L144 54.3 L152 68.9 L160 85.4 L168 102.9 L176 120.2 L184 136.3 L192 150.0 L200 160.6 L208 167.4 L216 170.0 L224 168.2 L232 162.0 L240 152.0 L248 138.7 L256 123.0 L264 105.9 L272 88.3 L280 71.5 L288 56.5 L296 44.2 L304 35.5 L312 30.8 L320 30.4 L328 34.4 L336 42.5 L344 54.3 L352 68.9 L360 85.4 L368 102.9 L376 120.2 L384 136.3 L392 150.0 L400 160.6"/>
+            <path class="art-c" d="M0 39.4 L8 50.0 L16 63.7 L24 79.8 L32 97.1 L40 114.6 L48 131.1 L56 145.7 L64 157.5 L72 165.6 L80 169.6 L88 169.2 L96 164.5 L104 155.8 L112 143.5 L120 128.5 L128 111.7 L136 94.1 L144 77.0 L152 61.3 L160 48.0 L168 38.0 L176 31.8 L184 30.0 L192 32.6 L200 39.4 L208 50.0 L216 63.7 L224 79.8 L232 97.1 L240 114.6 L248 131.1 L256 145.7 L264 157.5 L272 165.6 L280 169.6 L288 169.2 L296 164.5 L304 155.8 L312 143.5 L320 128.5 L328 111.7 L336 94.1 L344 77.0 L352 61.3 L360 48.0 L368 38.0 L376 31.8 L384 30.0 L392 32.6 L400 39.4"/>
+          </svg>
+          <span class="art-cap">3-phase · 120°</span>
+        </a>
+        <div class="proj-body">
+          <p class="proj-kicker"><span>Motor control firmware</span><span class="status wip">Work in progress</span></p>
+          <h3><a href="https://github.com/Gedankenn/ESP32-FOC" target="_blank" rel="noopener">ESP32-FOC</a></h3>
+          <p>ESP32 firmware toward Field-Oriented Control of a BLDC motor. Today it runs open-loop V/F control: a potentiometer on the ADC sets the speed reference, a FreeRTOS task integrates the electrical angle, and MCPWM drives three half-bridges at 1&nbsp;kHz.</p>
+          <p class="chips"><span class="chip">C</span><span class="chip">ESP-IDF</span><span class="chip">MCPWM</span><span class="chip">BLDC</span></p>
+        </div>
+      </article>
+
+      <article class="proj">
+        <a class="proj-media render" href="https://github.com/Gedankenn/3-phase-inverter" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <img src="assets/projects/3-phase-inverter-pcb3d.webp" alt="" width="1000" height="734" loading="lazy" decoding="async">
+        </a>
+        <div class="proj-body">
+          <p class="proj-kicker"><span>Power electronics</span><span class="status wip">Study</span></p>
+          <h3><a href="https://github.com/Gedankenn/3-phase-inverter" target="_blank" rel="noopener">3-phase-inverter</a></h3>
+          <p>Six-switch inverter for BLDC motors: three IR2110 gate drivers and six IRF540N MOSFETs (VDD 5&nbsp;V, VCC 15&nbsp;V), documented with PCB renders and datasheet notes. It is the power stage for ESP32-FOC.</p>
+          <p class="chips"><span class="chip">IR2110</span><span class="chip">IRF540N</span><span class="chip">PCB</span><span class="chip">GPL-3.0</span></p>
+        </div>
+      </article>
+
+      <article class="proj">
+        <a class="proj-media art" href="https://github.com/Gedankenn/OTPC" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <svg viewBox="0 0 400 200" role="presentation" focusable="false">
+            <g class="art-grid"><circle cx="200" cy="100" r="70"/><path d="M200 15 V185 M115 100 H285"/></g>
+            <path class="art-b" d="M200 100 L 262 64"/>
+            <path class="art-c" d="M200 100 L 236 162"/>
+            <path class="art-a" d="M200 100 L 270 100" transform="rotate(-30 200 100)"/>
+            <circle class="art-dot" cx="200" cy="100" r="4"/>
+            <text x="270" y="58" class="art-t">d</text><text x="240" y="180" class="art-t">q</text>
+          </svg>
+          <span class="art-cap">abc → αβ → dq</span>
+        </a>
+        <div class="proj-body">
+          <p class="proj-kicker"><span>Traction inverter · PMSM</span><span class="status wip">Phase 0 · modeling</span></p>
+          <h3><a href="https://github.com/Gedankenn/OTPC" target="_blank" rel="noopener">OTPC · Open Traction PMSM Controller</a></h3>
+          <p>An open-source FOC platform aimed at electric-motorcycle traction drives, built simulation-first. The repository has the PMSM model with Clarke/Park transforms and dq dynamics in Python, plus a written theory doc. STM32 firmware and the power stage are planned.</p>
+          <p class="chips"><span class="chip">FOC</span><span class="chip">PMSM</span><span class="chip">Python</span><span class="chip">STM32 (planned)</span></p>
+        </div>
+      </article>
+
+      <article class="proj">
+        <a class="proj-media art" href="https://github.com/Gedankenn/Python-Simulation-of-BLDC-motor-using-Kalman-Filter" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <svg viewBox="0 0 400 200" role="presentation" focusable="false">
+            <g class="art-grid"><path d="M30 170 H380 M30 20 V170"/></g>
+            <path class="art-b" d="M30 160 L 60 150 L 80 158 L 100 120 L 125 128 L 150 86 L 170 96 L 195 70 L 220 78 L 245 60 L 270 66 L 300 55 L 330 60 L 380 54"/>
+            <path class="art-a" d="M30 165 C 90 150, 130 100, 190 76 S 300 56, 380 56"/>
+          </svg>
+          <span class="art-cap">speed estimate vs. model</span>
+        </a>
+        <div class="proj-body">
+          <p class="proj-kicker"><span>Undergraduate thesis · UTFPR</span><span class="status ok">Complete</span></p>
+          <h3><a href="https://github.com/Gedankenn/Python-Simulation-of-BLDC-motor-using-Kalman-Filter" target="_blank" rel="noopener">BLDC simulation with FOC + Extended Kalman Filter</a></h3>
+          <p>Simulation of a brushless DC motor under Field-Oriented Control, with an Extended Kalman Filter estimating rotor speed. The repository holds the full derivation, the thesis (in Portuguese) and the result figures.</p>
+          <p class="chips"><span class="chip">EKF</span><span class="chip">FOC</span><span class="chip">BLDC model</span><span class="chip">Apache-2.0</span></p>
+        </div>
+      </article>
+    </div>
+
+    <div class="more">
+      <p class="label">More on GitHub</p>
+      <ul class="more-list">
+        <li><a href="https://github.com/Gedankenn/esp32_bootloader" target="_blank" rel="noopener">esp32_bootloader</a><span>Custom ESP32 bootloader / OTA (WIP)</span></li>
+        <li><a href="https://github.com/Gedankenn/esp32_drivers" target="_blank" rel="noopener">esp32_drivers</a><span>Custom ESP32 peripheral drivers</span></li>
+        <li><a href="https://github.com/Gedankenn/esp32_wattimeter" target="_blank" rel="noopener">esp32_wattimeter</a><span>ESP32-based wattmeter</span></li>
+        <li><a href="https://github.com/Gedankenn/esp32_mini" target="_blank" rel="noopener">esp32_mini</a><span>Minimal ESP32-C3 dev board, KiCad PCB</span></li>
+        <li><a href="https://github.com/Gedankenn/FileTransfer" target="_blank" rel="noopener">FileTransfer</a><span>File transfer protocol over raw Ethernet, in C</span></li>
+        <li><a href="https://github.com/Gedankenn/arduino_temp_sensor" target="_blank" rel="noopener">arduino_temp_sensor</a><span>ESP8266 + DHT22 → UDP → PostgreSQL → Grafana</span></li>
       </ul>
     </div>
-  </nav>
+  </div>
+</section>
 
-  <main class="wrap" id="top">
-    <!-- HERO -->
-    <header class="hero">
-      <div class="hero-status">[ SYSTEM <span class="ok">ONLINE</span> ] · AUTH <span class="ok">uid=0</span> · LOC: PATO BRANCO, PR · BR</div>
-      <h1 class="glitch" data-text="GEDANKENN">GEDANKENN</h1>
-      <div class="hero-role" id="role"></div>
-      <p class="hero-tag">
-        Computer Engineer with <b>4+ years</b> in embedded R&amp;D — firmware for <b>access control</b>,
-        <b>railway</b>, <b>automotive</b> and <b>industrial</b> systems. I build low-level software where
-        <b>physics, electrons and code collide</b>. At home with
-        oscilloscopes, logic analyzers, datasheets and a Linux terminal.
-      </p>
-      <div class="hero-cta">
-        <a class="btn" href="https://github.com/Gedankenn" target="_blank" rel="noopener">VIEW PROJECTS</a>
-        <a class="btn ghost" href="mailto:fabioslikastella@gmail.com">CONTACT ME</a>
+<!-- ============================== SKILLS ============================== -->
+<section class="section" id="skills" aria-labelledby="skills-h">
+  <div class="wrap">
+    <header class="sec-head"><span class="sec-idx">04</span><h2 id="skills-h">Skills</h2></header>
+    <div class="skills">
+      <div class="skill-group">
+        <h3>Embedded Linux</h3>
+        <p class="chips"><span class="chip on">Yocto Project</span><span class="chip">BitBake</span><span class="chip">OpenEmbedded</span><span class="chip on">Device Tree</span><span class="chip">DTS / DTB</span><span class="chip">Linux kernel</span><span class="chip on">Kernel drivers</span><span class="chip">BSP</span><span class="chip">OpenWrt</span><span class="chip">GCC</span></p>
       </div>
-      <div class="hero-bar">
-        <div class="bar-title"><span class="pulse">●</span> system.status</div>
-        <div class="row">
-          <span>ROLE: <b>R&amp;D FIRMWARE ENGINEER</b></span>
-          <span>COMPANY: <b>ControlID</b></span>
-          <span>DOMAIN: <b>EMBEDDED R&amp;D</b></span>
-          <span>OS: <b>ARCH LINUX</b></span>
-          <span>EDITOR: <b>NEOVIM</b></span>
-        </div>
+      <div class="skill-group">
+        <h3>Firmware</h3>
+        <p class="chips"><span class="chip on">Bare-metal</span><span class="chip on">Bootloader</span><span class="chip">OTA</span><span class="chip">Board bring-up</span><span class="chip">ARM Cortex-M</span><span class="chip">STM32</span><span class="chip">ESP32</span><span class="chip">MSP</span></p>
       </div>
-      <div class="hero-scroll">▼ SCROLL ▼</div>
-    </header>
+      <div class="skill-group">
+        <h3>Connectivity &amp; security</h3>
+        <p class="chips"><span class="chip">CAN</span><span class="chip">RS-485</span><span class="chip">I²C</span><span class="chip">UART</span><span class="chip">Ethernet</span><span class="chip">TCP/IP</span><span class="chip">MQTT</span><span class="chip">4G</span><span class="chip">Cryptography</span></p>
+      </div>
+      <div class="skill-group">
+        <h3>Languages &amp; tools</h3>
+        <p class="chips"><span class="chip on">C</span><span class="chip on">C++</span><span class="chip">Embedded C</span><span class="chip">Python</span><span class="chip">MATLAB</span><span class="chip">Bash</span><span class="chip">Assembly</span><span class="chip">GDB</span><span class="chip">Git</span><span class="chip">CMake</span><span class="chip">MATLAB/Simulink</span><span class="chip">Typhoon HIL</span></p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="sec-head reveal"><span class="idx">[01]</span><h2>WHO<span>AMI</span></h2></div>
-      <div class="about-grid">
-        <div class="card terminal reveal">
-          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">whoami</span></div>
-          <div class="line"><span class="t-out">fabio — computer engineer @ controlid</span></div>
-          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">echo "$education"</span></div>
-          <div class="line"><span class="t-out">bsc. computer engineering — utfpr, pato branco/pr</span></div>
-          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">echo "$focus"</span></div>
-          <div class="line"><span class="t-out">firmware · low-level software · hw/sw co-design</span></div>
-          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">echo "$experience"</span></div>
-          <div class="line"><span class="t-out">controlid · progress rail · zeentech</span></div>
-          <div class="line"><span class="t-out">&nbsp;&nbsp;· inobram · iav · xpert · utfpr research</span></div>
-          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">echo "$domains"</span></div>
-          <div class="line"><span class="t-out">access control · railway · automotive · industrial</span></div>
-          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">which tools</span></div>
-          <div class="line"><span class="t-out">oscilloscope · logic analyzer · datasheet · shell</span></div>
-          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">echo "$philosophy"</span></div>
-          <div class="line"><span class="t-out">close to the metal, <span class="t-mag">always</span></span></div>
-          <div class="line"><span class="t-cmd">$</span> <span class="t-dim">systemctl status fabio</span></div>
-          <div class="line"><span class="t-out">● fabio.service — R&amp;D firmware engineer</span></div>
-          <div class="line"><span class="t-out">&nbsp;&nbsp;active: <span style="color:#34d399">running</span></span><span class="cursor"></span></div>
-        </div>
-        <div class="card reveal">
-          <p style="font-size:14px;color:var(--muted)">
-            R&amp;D work turns hardware into real products — reliable firmware from the register level up, and
-            unclear requirements into working systems.
-          </p>
-          <br />
-          <p style="font-size:14px;color:var(--muted)">
-            Side projects and independent consulting under <span style="color:var(--magenta)">stellacorp.com.br</span>.
-            Experience across <span style="color:var(--cyan)">access control</span>, <span style="color:var(--cyan)">railway</span>,
-            <span style="color:var(--cyan)">automotive</span> and <span style="color:var(--cyan)">industrial</span> domains.
-          </p>
-          <br />
-          <p style="font-size:14px;color:var(--muted)">
-            Comfortable with <span style="color:var(--cyan)">CAN/J1939</span>, <span style="color:var(--cyan)">RS485</span>,
-            <span style="color:var(--cyan)">I²C</span>, <span style="color:var(--cyan)">SPI</span>,
-            <span style="color:var(--cyan)">UART</span> and real-time control. Bootloaders, OTA, hardware bring-up and
-            board validation are the daily bread.
-          </p>
+<!-- ============================== CONTACT ============================== -->
+<section class="section contact" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <header class="sec-head"><span class="sec-idx">05</span><h2 id="contact-h">Contact</h2></header>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-lede">Happy to talk about Embedded Linux, firmware and motor-control work.</p>
+        <p><a class="mail" href="mailto:fabioslikastella@gmail.com">fabioslikastella@gmail.com</a></p>
+        <div class="cta">
+          <a class="btn primary" href="https://github.com/Gedankenn/Curriculo/blob/main/Curriculo_Fabio_Stella_EN.pdf" target="_blank" rel="noopener">CV · English</a>
+          <a class="btn" href="https://github.com/Gedankenn/Curriculo/blob/main/Curriculo_Fabio_Stella_PT.pdf" target="_blank" rel="noopener">CV · Português</a>
         </div>
       </div>
-    </section>
+      <ul class="links">
+        <li><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/" target="_blank" rel="noopener">in/fabio-slika-stella</a></li>
+        <li><span class="label">GitHub</span><a href="https://github.com/Gedankenn" target="_blank" rel="noopener">github.com/Gedankenn</a></li>
+        <li><span class="label">X</span><a href="https://x.com/Th00rBeardedOne" target="_blank" rel="noopener">@Th00rBeardedOne</a></li>
+        <li><span class="label">Location</span><span>Pato Branco, PR, Brazil (UTC−3)</span></li>
+      </ul>
+    </div>
+    <details class="metrics">
+      <summary>GitHub activity <span class="dim">(auto-generated metrics)</span></summary>
+      <img src="github-metrics.svg" alt="GitHub metrics for Gedankenn, generated by a GitHub Action" width="480" height="1142" loading="lazy" decoding="async">
+    </details>
+  </div>
+</section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience">
-      <div class="sec-head reveal"><span class="idx">[02]</span><h2>EXPERIENCE <span>TIMELINE</span></h2></div>
+</main>
 
-      <div class="sc-banner reveal">
-        <span class="sc-ico">◈</span>
-        <div class="sc-text">
-          <h3>STELLACORP.COM.BR</h3>
-          <p>Side projects and independent consulting — ESP32, STM32, Linux embedded, system architecture.</p>
-        </div>
-      </div>
-
-      <div class="card reveal" style="padding: 30px;">
-        <div class="timeline">
-          <div class="tl-item highlight">
-            <div class="tl-dot"></div>
-            <div class="tl-date">2026 — PRESENT</div>
-            <div class="tl-title">Embedded Software Developer II</div>
-            <div class="tl-company">ControlID</div>
-            <div class="tl-desc">Firmware for access control devices — bootloader development, embedded Linux with Yocto, communication protocols, OTA updates, diagnostics and debugging. Working with Texas Instruments and STMicroelectronics MCUs.</div>
-            <span class="tl-tag">Access Control</span><span class="tl-tag">Bootloader</span><span class="tl-tag">Yocto</span><span class="tl-tag">TI</span><span class="tl-tag">STM</span><span class="tl-tag">OTA</span>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">2024 — 2025</div>
-            <div class="tl-title">Embedded Systems Engineer</div>
-            <div class="tl-company">Progress Rail — Caterpillar</div>
-            <div class="tl-desc">Firmware for critical railway systems in C/C++ — integration of industrial electronic modules.</div>
-            <span class="tl-tag">C/C++</span><span class="tl-tag">Railway</span><span class="tl-tag">Industrial</span>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">2024</div>
-            <div class="tl-title">Software Engineer</div>
-            <div class="tl-company">Zeentech — Stellantis</div>
-            <div class="tl-desc">Automotive embedded software development and electronic system validation.</div>
-            <span class="tl-tag">Automotive</span><span class="tl-tag">Validation</span>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">2022 — 2024</div>
-            <div class="tl-title">Embedded Systems Developer</div>
-            <div class="tl-company">InoBram</div>
-            <div class="tl-desc">Firmware for industrial controllers, STM32 bootloader development and UART/I2C/RS485 protocol implementation.</div>
-            <span class="tl-tag">STM32</span><span class="tl-tag">Bootloader</span><span class="tl-tag">Industrial</span>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">2022</div>
-            <div class="tl-title">Test Analyst</div>
-            <div class="tl-company">IAV do Brasil</div>
-            <div class="tl-desc">Automotive validation with Typhoon HIL and black-box testing.</div>
-            <span class="tl-tag">HIL</span><span class="tl-tag">Testing</span><span class="tl-tag">Automotive</span>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">2021 — 2022</div>
-            <div class="tl-title">R&amp;D Intern</div>
-            <div class="tl-company">Xpert Automação</div>
-            <div class="tl-desc">Hardware and firmware for automation with ESP32, OpenWRT and distributed systems.</div>
-            <span class="tl-tag">ESP32</span><span class="tl-tag">OpenWRT</span><span class="tl-tag">IoT</span>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">2020 — 2022</div>
-            <div class="tl-title">Researcher</div>
-            <div class="tl-company">UTFPR</div>
-            <div class="tl-desc">Modeling and simulation of electric motor algorithms and embedded control.</div>
-            <span class="tl-tag">Research</span><span class="tl-tag">Motor Control</span><span class="tl-tag">Simulation</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- STACK -->
-    <section id="stack">
-      <div class="sec-head reveal"><span class="idx">[03]</span><h2>TOOL<span>CHAIN</span></h2></div>
-      <div class="skills-grid">
-        <div class="card reveal" style="padding: 26px;">
-          <h4 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;letter-spacing:2px;color:var(--violet);margin-bottom:20px;">SKILL RATINGS</h4>
-          <div class="skill-row">
-            <span class="skill-name">C / C++</span>
-            <div class="skill-bar"><div class="skill-fill cyan" data-width="100"></div></div>
-            <span class="skill-pct">5.0</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Embedded Systems</span>
-            <div class="skill-bar"><div class="skill-fill magenta" data-width="94"></div></div>
-            <span class="skill-pct">4.7</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Python</span>
-            <div class="skill-bar"><div class="skill-fill amber" data-width="90"></div></div>
-            <span class="skill-pct">4.5</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Linux</span>
-            <div class="skill-bar"><div class="skill-fill teal" data-width="86"></div></div>
-            <span class="skill-pct">4.3</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">MATLAB</span>
-            <div class="skill-bar"><div class="skill-fill violet" data-width="80"></div></div>
-            <span class="skill-pct">4.0</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">KiCad</span>
-            <div class="skill-bar"><div class="skill-fill cyan" data-width="70"></div></div>
-            <span class="skill-pct">3.5</span>
-          </div>
-        </div>
-        <div class="card stack-group reveal">
-          <h4>LANGUAGES</h4>
-          <div class="chips">
-            <span class="chip c">C</span><span class="chip m">C++</span><span class="chip a">Python</span>
-            <span class="chip v">Bash</span><span class="chip a">Assembly</span><span class="chip t">Lua</span>
-            <span class="chip a">JavaScript</span><span class="chip c">TypeScript</span><span class="chip m">Rust</span><span class="chip v">QML</span>
-          </div>
-        </div>
-        <div class="card stack-group reveal">
-          <h4>MCUs &amp; SBCs</h4>
-          <div class="chips">
-            <span class="chip c">ESP32</span><span class="chip t">STM32</span><span class="chip a">AVR</span><span class="chip v">Raspberry Pi</span>
-          </div>
-        </div>
-        <div class="card stack-group reveal">
-          <h4>INTERFACES</h4>
-          <div class="chips">
-            <span class="chip c">SPI</span><span class="chip m">I²C</span><span class="chip v">UART</span>
-            <span class="chip a">CAN</span><span class="chip t">PWM</span><span class="chip m">ADC</span>
-            <span class="chip t">Ethernet</span><span class="chip c">I2S</span>
-          </div>
-        </div>
-        <div class="card stack-group reveal">
-          <h4>FRAMEWORKS</h4>
-          <div class="chips">
-            <span class="chip c">ESP-IDF</span><span class="chip t">FreeRTOS</span><span class="chip m">Django</span>
-            <span class="chip a">FastAPI</span><span class="chip v">Tauri</span><span class="chip c">PyTorch</span>
-          </div>
-        </div>
-        <div class="card stack-group reveal">
-          <h4>TOOLING</h4>
-          <div class="chips">
-            <span class="chip c">Linux</span><span class="chip v">GDB</span>
-            <span class="chip m">OpenOCD</span><span class="chip t">KiCad</span><span class="chip c">Docker</span>
-            <span class="chip m">Git</span><span class="chip t">Neovim</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Languages & Certifications -->
-      <div style="margin-top: 40px;">
-        <div class="sec-head reveal"><span class="idx">[04]</span><h2>LANGUAGES &amp; <span>CERTS</span></h2></div>
-        <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 18px;">
-          <div class="lang-grid reveal">
-            <div class="card lang-card">
-              <div class="lang-name">Portuguese</div>
-              <div class="lang-level">NATIVE</div>
-              <div class="lang-bar"><div class="lang-bar-fill" style="width:100%;background:var(--cyan);"></div></div>
-            </div>
-            <div class="card lang-card">
-              <div class="lang-name">English</div>
-              <div class="lang-level">ADVANCED</div>
-              <div class="lang-bar"><div class="lang-bar-fill" style="width:85%;background:var(--magenta);"></div></div>
-            </div>
-          </div>
-          <div class="cert-grid reveal">
-            <div class="card cert-item">
-              <span class="cert-ico">◈</span>
-              <div>
-                <div class="cert-name">Embedded Systems Bare-Metal Programming</div>
-                <div class="cert-org">Udemy · 2023 · STM32</div>
-              </div>
-            </div>
-            <div class="card cert-item">
-              <span class="cert-ico">◈</span>
-              <div>
-                <div class="cert-name">IoT Application Development</div>
-                <div class="cert-org">Udemy · 2023 · ESP32</div>
-              </div>
-            </div>
-            <div class="card cert-item">
-              <span class="cert-ico">◈</span>
-              <div>
-                <div class="cert-name">Networking Academy</div>
-                <div class="cert-org">Cisco · 2020</div>
-              </div>
-            </div>
-            <div class="card cert-item">
-              <span class="cert-ico">◈</span>
-              <div>
-                <div class="cert-name">Introduction to Cybersecurity</div>
-                <div class="cert-org">Cisco · 2020</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="sec-head reveal"><span class="idx">[05]</span><h2>SELECTED <span>PROJECTS</span></h2></div>
-
-      <!-- Embedded & Firmware -->
-      <div class="proj-cat reveal">
-        <div class="proj-cat-head"><span class="cat-ico">⚙</span>EMBEDDED &amp; FIRMWARE</div>
-        <div class="proj-grid">
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/ESP32-FOC" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars">★ 10</span></div>
-              <h3>ESP32-FOC</h3>
-              <p>Field-Oriented Control of BLDC motors on the ESP32 — torque, speed and position control at the register level.</p>
-              <div class="tags"><span>ESP32</span><span>C</span><span>FOC</span><span>Motor Control</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/OTPC" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars">NEW</span></div>
-              <h3>OTPC</h3>
-              <p>Open Traction PMSM Controller — power-stage firmware for permanent-magnet synchronous motor traction.</p>
-              <div class="tags"><span>PMSM</span><span>Python</span><span>Control</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/power_profiller" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars">★ 4</span></div>
-              <h3>Power Profiler</h3>
-              <p>Real-time energy profiling for battery-powered electronics — ESP32 + INA226, live Chart.js dashboard, burst analysis.</p>
-              <div class="tags"><span>ESP-IDF</span><span>INA226</span><span>I²C</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/esp32_drivers" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>esp32_drivers</h3>
-              <p>Custom ESP32 peripheral drivers — register-level hardware abstraction.</p>
-              <div class="tags"><span>ESP32</span><span>C</span><span>Drivers</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/esp32_wattimeter" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>esp32_wattimeter</h3>
-              <p>ESP32-based wattimeter for power measurement applications.</p>
-              <div class="tags"><span>ESP32</span><span>C</span><span>Power</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/3-phase-inverter" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars">WIP</span></div>
-              <h3>3-Phase Inverter</h3>
-              <p>Study and implementation of a 3-phase inverter module for motor drive applications.</p>
-              <div class="tags"><span>Power</span><span>Inverter</span><span>Control</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/esp32_bootloader" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars">WIP</span></div>
-              <h3>esp32_bootloader</h3>
-              <p>Custom bootloader work for the ESP32 — OTA-capable firmware update paths.</p>
-              <div class="tags"><span>ESP32</span><span>Bootloader</span><span>OTA</span></div>
-            </a>
-          </div>
-          <div class="card proj local reveal">
-            <div>
-              <div class="p-top"><span class="ico">▣</span><span class="local-badge">LOCAL</span></div>
-              <h3>bt-headphone</h3>
-              <p>Custom Bluetooth headphones — ESP32 + PCM5102A DAC + TPA6132A2 amp, full spec &amp; design.</p>
-              <div class="tags"><span>ESP32</span><span>Bluetooth A2DP</span><span>Audio</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hardware & PCB Design -->
-      <div class="proj-cat reveal">
-        <div class="proj-cat-head"><span class="cat-ico">🔌</span>HARDWARE &amp; PCB DESIGN</div>
-        <div class="proj-grid">
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/esp32_mini" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>esp32_mini</h3>
-              <p>Minimal ESP32-C3-MINI-1 dev board — KiCad PCB with USB-C, 3.3V reg, boot/reset buttons.</p>
-              <div class="tags"><span>KiCad</span><span>ESP32-C3</span><span>PCB</span></div>
-            </a>
-          </div>
-          <div class="card proj local reveal">
-            <div>
-              <div class="p-top"><span class="ico">▣</span><span class="local-badge">LOCAL</span></div>
-              <h3>kicad</h3>
-              <p>Dracula theme for KiCad — dark color scheme for schematic &amp; PCB editors.</p>
-              <div class="tags"><span>KiCad</span><span>Theme</span></div>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:16px;" class="reveal">
-          <div class="card" style="padding:18px 22px;">
-            <div style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;">PLATFORMS I DESIGN FOR</div>
-            <div class="chips">
-              <span class="chip m">STMicrocontrollers</span>
-              <span class="chip c">Texas Instruments</span>
-              <span class="chip a">Allwinner Sunxi</span>
-              <span class="chip v">Rockchip</span>
-              <span class="chip t">ESP32</span>
-              <span class="chip c">Raspberry Pi</span>
-              <span class="chip a">BeagleBone Black</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI & Machine Learning -->
-      <div class="proj-cat reveal">
-        <div class="proj-cat-head"><span class="cat-ico">🤖</span>AI &amp; MACHINE LEARNING</div>
-        <div class="proj-grid">
-          <div class="card proj local reveal">
-            <div>
-              <div class="p-top"><span class="ico">▣</span><span class="local-badge">LOCAL</span></div>
-              <h3>LuxTTS</h3>
-              <p>High-performance TTS — voice cloning with 3s reference, 48kHz output, 150x realtime, &lt;1GB VRAM.</p>
-              <div class="tags"><span>PyTorch</span><span>TTS</span><span>Voice Cloning</span></div>
-            </div>
-          </div>
-          <div class="card proj local reveal">
-            <div>
-              <div class="p-top"><span class="ico">▣</span><span class="local-badge">LOCAL</span></div>
-              <h3>MetaMe</h3>
-              <p>Personal digital twin — extracts WhatsApp history, trains on communication style via Ollama LLM.</p>
-              <div class="tags"><span>Python</span><span>Ollama</span><span>NLP</span></div>
-            </div>
-          </div>
-          <div class="card proj local reveal">
-            <div>
-              <div class="p-top"><span class="ico">▣</span><span class="local-badge">LOCAL</span></div>
-              <h3>mono</h3>
-              <p>Configurable AI assistant framework — file-based personas, CLI &amp; WhatsApp-style web UI.</p>
-              <div class="tags"><span>FastAPI</span><span>OpenAI</span><span>Docker</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Web Applications -->
-      <div class="proj-cat reveal">
-        <div class="proj-cat-head"><span class="cat-ico">🌐</span>WEB APPLICATIONS</div>
-        <div class="proj-grid">
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/pato" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>pato — PatoAgenda AI</h3>
-              <p>WhatsApp chatbot for appointment scheduling — LLM-powered natural language receptionist for service businesses.</p>
-              <div class="tags"><span>FastAPI</span><span>WhatsApp</span><span>LLM</span></div>
-            </a>
-          </div>
-          <div class="card proj local reveal">
-            <div>
-              <div class="p-top"><span class="ico">▣</span><span class="local-badge">LOCAL</span></div>
-              <h3>MyFinances</h3>
-              <p>Personal finance app — Django + HTMX, AI financial advisor, bank sync via Playwright, budgets &amp; goals.</p>
-              <div class="tags"><span>Django</span><span>HTMX</span><span>AI</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tools & Utilities -->
-      <div class="proj-cat reveal">
-        <div class="proj-cat-head"><span class="cat-ico">🔧</span>TOOLS &amp; UTILITIES</div>
-        <div class="proj-grid">
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/FileTransfer" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>FileTransfer</h3>
-              <p>Custom file transfer protocol over raw Ethernet — handshake, metadata, ACK, data flow in C.</p>
-              <div class="tags"><span>C</span><span>Sockets</span><span>Protocol</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/mysocket" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars">★ 4</span></div>
-              <h3>mysocket</h3>
-              <p>Own socket wrapper in C — minimal, fast networking layer with no legacy baggage.</p>
-              <div class="tags"><span>C</span><span>Sockets</span><span>Networking</span></div>
-            </a>
-          </div>
-          <div class="card proj local reveal">
-            <div>
-              <div class="p-top"><span class="ico">▣</span><span class="local-badge">LOCAL</span></div>
-              <h3>sigrok-ht6p20b-decoder</h3>
-              <p>Sigrok/PulseView protocol decoder for HT6P20B OOK PWM encoder IC — 24-bit frame decode.</p>
-              <div class="tags"><span>Python</span><span>Sigrok</span><span>Protocol</span></div>
-            </div>
-          </div>
-          <div class="card proj local reveal">
-            <div>
-              <div class="p-top"><span class="ico">▣</span><span class="local-badge">LOCAL</span></div>
-              <h3>ytDownload</h3>
-              <p>YouTube video/audio downloader CLI — quality presets, MP3 extraction, visual progress bar.</p>
-              <div class="tags"><span>Python</span><span>yt-dlp</span><span>CLI</span></div>
-            </div>
-          </div>
-          <div class="card proj local reveal">
-            <div>
-              <div class="p-top"><span class="ico">▣</span><span class="local-badge">LOCAL</span></div>
-              <h3>raspi4</h3>
-              <p>Arch Linux ARM flash utility for Raspberry Pi 4 — automated partitioning &amp; setup.</p>
-              <div class="tags"><span>Bash</span><span>Raspberry Pi</span><span>Arch Linux</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Linux & Desktop -->
-      <div class="proj-cat reveal">
-        <div class="proj-cat-head"><span class="cat-ico">🐧</span>LINUX &amp; DESKTOP</div>
-        <div class="proj-grid">
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/third-impact" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>third-impact</h3>
-              <p>Evangelion-inspired theme for Omarchy — cyberpunk takeover of the desktop.</p>
-              <div class="tags"><span>Shell</span><span>Omarchy</span><span>Theme</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/magi" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>magi</h3>
-              <p>Caelestia-style edge drawers for Omarchy: auto-hiding bar and MAGI dashboard in QML.</p>
-              <div class="tags"><span>QML</span><span>Omarchy</span><span>Desktop</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/omaweather" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>omaweather</h3>
-              <p>Weather plugin for Omarchy — live conditions straight on the bar.</p>
-              <div class="tags"><span>QML</span><span>Omarchy</span><span>Plugin</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/oled-look" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>oled-look</h3>
-              <p>Hyprland OLED-like LCD grade — 6500 K warm screen shader for eye comfort.</p>
-              <div class="tags"><span>Shell</span><span>Hyprland</span><span>Color</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/nvim" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>nvim</h3>
-              <p>Personal Neovim config — fast, LSP-native editing setup in Lua.</p>
-              <div class="tags"><span>Lua</span><span>Neovim</span><span>Config</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/site-genner" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>site-genner</h3>
-              <p>Static site generator — TypeScript tooling for fast, dependency-light builds.</p>
-              <div class="tags"><span>TypeScript</span><span>Static Site</span><span>Tooling</span></div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Data & Simulation -->
-      <div class="proj-cat reveal">
-        <div class="proj-cat-head"><span class="cat-ico">📈</span>DATA &amp; SIMULATION</div>
-        <div class="proj-grid">
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/Python-Simulation-of-BLDC-motor-using-Kalman-Filter" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>Kalman BLDC Sim</h3>
-              <p>BLDC motor simulation with Kalman filter — state estimation and trajectory tracking.</p>
-              <div class="tags"><span>Python</span><span>Kalman</span><span>Simulation</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/simulador-b3" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars"></span></div>
-              <h3>simulador-b3</h3>
-              <p>B3 stock exchange simulator — market dynamics and trading strategy backtesting.</p>
-              <div class="tags"><span>Python</span><span>Finance</span><span>Simulation</span></div>
-            </a>
-          </div>
-          <div class="card proj reveal">
-            <a href="https://github.com/Gedankenn/stocks" target="_blank" rel="noopener">
-              <div class="p-top"><span class="ico">▣</span><span class="stars">★ 3</span></div>
-              <h3>stocks</h3>
-              <p>Terminal stock portfolio — real-time tracking in the shell.</p>
-              <div class="tags"><span>Python</span><span>Finance</span><span>CLI</span></div>
-            </a>
-          </div>
-          <div class="card proj local reveal">
-            <div>
-              <div class="p-top"><span class="ico">▣</span><span class="local-badge">LOCAL</span></div>
-              <h3>inmet_data</h3>
-              <p>Brazil INMET weather data — parsing, visualization &amp; trend analysis (2000–2026).</p>
-              <div class="tags"><span>Python</span><span>matplotlib</span><span>Data Viz</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p class="more">
-        <a href="https://github.com/Gedankenn" target="_blank" rel="noopener">view all repos on GitHub →</a>
-      </p>
-    </section>
-
-    <!-- PHILOSOPHY -->
-    <section id="philosophy">
-      <div class="sec-head reveal"><span class="idx">[06]</span><h2>ENGINEERING <span>PHILOSOPHY</span></h2></div>
-      <div class="card philo reveal">
-        <div class="row"><span class="op">▸</span><span class="tx">understand the system before optimizing it</span><span class="cm"># measure first</span></div>
-        <div class="row"><span class="op">▸</span><span class="tx">measure before guessing</span><span class="cm"># trust the scope</span></div>
-        <div class="row"><span class="op">▸</span><span class="tx">read the datasheet</span><span class="cm"># it is the law</span></div>
-        <div class="row"><span class="op">▸</span><span class="tx">respect physics</span><span class="cm"># you cannot negotiate</span></div>
-        <div class="row"><span class="op">▸</span><span class="tx">automate everything repeatable</span><span class="cm"># scripts > humans</span></div>
-        <div class="row"><span class="op">▸</span><span class="tx">keep firmware boring and reliable</span><span class="cm"># stable wins</span></div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="sec-head reveal"><span class="idx">[07]</span><h2>OPEN A <span>CHANNEL</span></h2></div>
-      <div class="contact-cards contact">
-        <div class="card reveal">
-          <a href="mailto:fabioslikastella@gmail.com"><span class="c-ico">✉</span>EMAIL<br /><span style="font-size:12.5px;color:var(--muted)">fabioslikastella@gmail.com</span></a>
-        </div>
-        <div class="card reveal">
-          <a href="https://www.linkedin.com/in/fabio-slika-stella-6a37b513a/" target="_blank" rel="noopener"><span class="c-ico">in</span>LINKEDIN<br /><span style="font-size:12.5px;color:var(--muted)">/fabio-slika-stella</span></a>
-        </div>
-        <div class="card reveal">
-          <a href="https://x.com/Th00rBeardedOne" target="_blank" rel="noopener"><span class="c-ico">✕</span>X / TWITTER<br /><span style="font-size:12.5px;color:var(--muted)">@Th00rBeardedOne</span></a>
-        </div>
-        <div class="card reveal">
-          <a href="https://github.com/Gedankenn" target="_blank" rel="noopener"><span class="c-ico">⌥</span>GITHUB<br /><span style="font-size:12.5px;color:var(--muted)">/Gedankenn</span></a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    © 2026 Fabio S. Stella — R&D Firmware Engineer · Close to the metal <span class="foot-heart">⚙</span> fueled by coffee ☕
-    <div class="clock" id="clock">UTC --:--:--</div>
-  </footer>
-
-  <script>
-    /* ---------- boot sequence ---------- */
-    (function () {
-      const lines = [
-        "GEDANKENN SYSTEMS v5.5 // embedded edition",
-        "> bios ...... ok",
-        "> kernel .... linux (arch) — low-latency",
-        "> toolchain . gcc / clang / gdb / openocd",
-        "> probes .... i2c[ok] spi[ok] uart[ok] can[ok]",
-        "> domains ... access.control[ok] railway[ok] automotive[ok] industrial[ok]",
-        "> trust .... uid=0 granted",
-        "> shell ..... ready. close to the metal.",
-        "",
-        "boot in 3... 2... 1..."
-      ];
-      const el = document.getElementById("bootText");
-      const boot = document.getElementById("boot");
-      let li = 0, ci = 0;
-      function typeLine() {
-        if (li >= lines.length) {
-          setTimeout(() => boot.classList.add("done"), 600);
-          return;
-        }
-        const line = lines[li];
-        el.textContent = lines.slice(0, li).join("\n") + "\n" + line.slice(0, ci + 1) + "█";
-        ci++;
-        if (ci <= line.length) {
-          setTimeout(typeLine, li === lines.length - 1 ? 90 : 16);
-        } else {
-          el.textContent = lines.slice(0, li + 1).join("\n");
-          ci = 0; li++;
-          setTimeout(typeLine, li === lines.length - 1 ? 240 : 60);
-        }
-      }
-      setTimeout(typeLine, 350);
-    })();
-
-    /* ---------- typed roles ---------- */
-    const roles = [
-      "R&D FIRMWARE ENGINEER",
-      "EMBEDDED SYSTEMS",
-      "EMBEDDED LINUX",
-      "CLOSE TO THE METAL"
-    ];
-    const roleEl = document.getElementById("role");
-    let ri = 0, rci = 0, deleting = false;
-    function typeRole() {
-      const word = roles[ri];
-      const speed = deleting ? 40 : 90;
-      if (!deleting) {
-        rci++;
-        roleEl.textContent = word.slice(0, rci) + '<span class="cursor">&nbsp;</span>';
-        if (rci === word.length) { deleting = true; setTimeout(typeRole, 1700); return; }
-      } else {
-        rci--;
-        roleEl.textContent = word.slice(0, rci) + '<span class="cursor">&nbsp;</span>';
-        if (rci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
-      }
-      setTimeout(typeRole, speed);
-    }
-    setTimeout(typeRole, 3200);
-
-    /* ---------- count-up ---------- */
-    function animateCount(el) {
-      const target = parseInt(el.dataset.count, 10);
-      const dur = 1200;
-      const t0 = performance.now();
-      function step(t) {
-        const p = Math.min((t - t0) / dur, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(eased * target);
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-
-    /* ---------- reveal + count + skill bars on scroll ---------- */
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        e.target.classList.add("on");
-        e.target.querySelectorAll("[data-count]").forEach(animateCount);
-        e.target.querySelectorAll(".skill-fill[data-width]").forEach((el) => {
-          el.style.width = el.dataset.width + "%";
-        });
-        io.unobserve(e.target);
-      });
-    }, { threshold: 0.15 });
-    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
-
-    /* ---------- particles ---------- */
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    let W, H, parts;
-    const N = 55;
-    function resize() {
-      W = canvas.width = innerWidth;
-      H = canvas.height = innerHeight;
-    }
-    function spawn() {
-      parts = Array.from({ length: N }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.6 + 0.4,
-        c: Math.random() < 0.5 ? "0,240,255" : "255,45,170"
-      }));
-    }
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      for (const p of parts) {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > W) p.vx *= -1;
-        if (p.y < 0 || p.y > H) p.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.c},0.75)`;
-        ctx.fill();
-      }
-      for (let i = 0; i < parts.length; i++) {
-        for (let j = i + 1; j < parts.length; j++) {
-          const a = parts[i], b = parts[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const d = Math.hypot(dx, dy);
-          if (d < 110) {
-            ctx.strokeStyle = `rgba(0,240,255,${(1 - d / 110) * 0.14})`;
-            ctx.lineWidth = 0.6;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(draw);
-    }
-    resize(); spawn(); draw();
-    addEventListener("resize", () => { resize(); spawn(); });
-
-    /* ---------- clock ---------- */
-    const clockEl = document.getElementById("clock");
-    function tick() {
-      clockEl.textContent = "UTC " + new Date().toISOString().slice(11, 19);
-    }
-    tick(); setInterval(tick, 1000);
-  </script>
+<footer class="footer">
+  <div class="wrap footer-in">
+    <span>© 2026 Fabio Slika Stella</span>
+    <span class="mono dim">static HTML/CSS · no trackers</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
 </body>
 </html>
